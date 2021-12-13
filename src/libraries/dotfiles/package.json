@@ -1,0 +1,20 @@
+{
+	"version": "1.0.0",
+	"license": "GPL-2.0-or-later",
+	"name": "@clevercanyon/package",
+	"author": {
+		"name": "CLEVER CANYON",
+		"url": "https://clevercanyon.com"
+	},
+	"devDependencies": {
+		"@clevercanyon/php-js-utilities-dev-npm": "latest"
+	},
+	"config": {
+		"tailwind": {
+			"theme": {}
+		},
+		"webpack": {
+			"assetDirs": []
+		}
+	}
+}
