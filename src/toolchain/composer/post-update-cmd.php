@@ -13,17 +13,19 @@ namespace Clever_Canyon\Utilities_Dev\Toolchain\Composer;
 /**
  * Dependencies.
  *
- * @since 1.0.0
+ * @since 2021-12-15
  */
 use Clever_Canyon\Utilities\OOPs\Version_1_0_0 as U;
-use Clever_Canyon\Utilities_Dev\Toolchain\Common\{ Utilities as Common };
-use Clever_Canyon\Utilities_Dev\Toolchain\Composer\{ Project, Utilities };
-use Clever_Canyon\Utilities_Dev\Toolchain\Composer\Hooks\{ Post_Update_Cmd_Handler };
+use Clever_Canyon\Utilities\OOP\Version_1_0_0\Exception;
+
+use Clever_Canyon\Utilities_Dev\Toolchain\Common\{Utilities as Common};
+use Clever_Canyon\Utilities_Dev\Toolchain\Composer\{Project, Utilities};
+use Clever_Canyon\Utilities_Dev\Toolchain\Composer\Hooks\{Post_Update_Cmd_Handler};
 
 /**
  * Dev mode only.
  *
- * @since 1.0.0
+ * @since 2021-12-15
  */
 if ( ! getenv( 'COMPOSER_DEV_MODE' ) ) {
 	exit( 'Dev mode only.' );
@@ -32,7 +34,7 @@ if ( ! getenv( 'COMPOSER_DEV_MODE' ) ) {
 /**
  * Handles `post-update-cmd` hook.
  *
- * @since 1.0.0
+ * @since 2021-12-15
  */
 require_once getcwd() . '/vendor/autoload.php';
 new Post_Update_Cmd_Handler();

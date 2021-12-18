@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'https://fonts.googleapis.com/css2?family=Georama:ital,wght@0,100..900;1,100..900&display=swap';
+
+.foo {
+	.bar {
+		.baz {
+			hyphens: manual;
+			font-smooth: always;
+		}
+	}
+}
+
+div > .foo[type='input']:hover {
+	color: #ffffff;
+}

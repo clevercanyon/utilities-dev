@@ -1,0 +1,20 @@
+{
+	"manifest" : [
+		".webpack/webpack.config.cjs",
+		".babelrc.cjs",
+		".browserslistrc",
+		".cssnanorc.cjs",
+		".eslintrc.cjs",
+		".gitattributes",
+		".gitignore",
+		".linariarc.cjs",
+		".npmignore",
+		".phpcs.xml",
+		".phpunit.xml",
+		".postcssrc.cjs",
+		".prettierrc.cjs",
+		".stylelintrc.cjs",
+		".tailwindrc.cjs",
+		"package.json"
+	]
+}

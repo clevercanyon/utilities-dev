@@ -12,26 +12,19 @@ namespace Clever_Canyon\Utilities_Dev\Toolchain\Composer;
 /**
  * Dependencies.
  *
- * @since 1.0.0
+ * @since 2021-12-15
  */
 use Clever_Canyon\Utilities\OOPs\Version_1_0_0 as U;
-use Clever_Canyon\Utilities_Dev\Toolchain\Common\{ Utilities as Common };
-use Clever_Canyon\Utilities\OOPs\Version_1_0_0\{ Base };
+use Clever_Canyon\Utilities\OOP\Version_1_0_0\Exception;
+
+use Clever_Canyon\Utilities_Dev\Toolchain\Common\{Utilities as Common};
+use Clever_Canyon\Utilities\OOPs\Version_1_0_0\{Base};
 
 /**
  * Utilities.
  *
- * @since 1.0.0
+ * @since 2021-12-15
  */
 class Utilities extends Base {
-	/**
-	 * Is dev mode?
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return bool True if dev mode.
-	 */
-	public static function is_dev_mode() : bool {
-		return (bool) getenv( 'COMPOSER_DEV_MODE' );
-	}
+	// Nothing for now.
 }

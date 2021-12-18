@@ -1,65 +1,70 @@
 {
-	"license": "GPL-2.0-or-later",
-	"name": "clevercanyon/php-js-utilities-dev",
-	"description": "Intended for internal company use only. CLEVER CANYON's dev utilities are for PHP/JS development.",
-	"authors": [
+	"license"           : "GPL-2.0-or-later",
+	"name"              : "clevercanyon/php-js-utilities-dev",
+	"description"       : "Intended for internal company use only. CLEVER CANYON's dev utilities are for PHP/JS development.",
+	"authors"           : [
 		{
-			"name": "CLEVER CANYON",
-			"homepage": "https://clevercanyon.com",
-			"role": "organization"
+			"name"     : "CLEVER CANYON",
+			"homepage" : "https://clevercanyon.com",
+			"role"     : "organization"
 		}
 	],
-	"prefer-stable": true,
-	"minimum-stability": "dev",
-	"config": {
-		"process-timeout": 0,
-		"optimize-autoloader": true
+	"prefer-stable"     : true,
+	"minimum-stability" : "dev",
+	"config"            : {
+		"process-timeout"     : 0,
+		"optimize-autoloader" : true
 	},
-	"require": {
-		"aws/aws-sdk-php": "^3.2",
-		"phpunit/phpunit": "^9.5",
-		"clevercanyon/php-js-standards": "dev-main"
+	"require"           : {
+		"php"                           : "^7.4 || ^8.0",
+		"aws/aws-sdk-php"               : "^3.2",
+		"phpunit/phpunit"               : "^9.5",
+		"clevercanyon/php-js-standards" : "dev-main",
+		"clevercanyon/php-js-utilities" : "dev-main"
 	},
-	"autoload": {
-		"psr-4": {
-			"Clever_Canyon\\Utilities_Dev\\": "./src/classes"
+	"autoload"          : {
+		"psr-4" : {
+			"Clever_Canyon\\Utilities_Dev\\" : "./src/classes"
 		}
 	},
-	"autoload-dev": {
-		"files": [ "../../php-js-utilities/vendor/autoload.php" ],
-		"psr-4": {
-			"Clever_Canyon\\Utilities_Dev__Tests\\": "./tests/classes"
+	"autoload-dev"      : {
+		"psr-4" : {
+			"Clever_Canyon\\Utilities_Dev__Tests\\" : "./tests/classes"
 		}
 	},
-	"scripts": {
-		"post-update-cmd": [
+	"scripts"           : {
+		"post-update-cmd"   : [
 			"[ $COMPOSER_DEV_MODE -eq 0 ] || ./src/toolchain/composer/post-update-cmd.php"
 		],
-		"run-project-tests": [
+		"run-project-tests" : [
 			"XDEBUG_MODE=coverage phpunit --configuration ./.phpunit.xml --testsuite tests"
 		]
 	},
-	"extra": {
-		"props": {
-			"brand": {
-				"data": {
-					"slug": "clevercanyon"
-				},
-				"aws": {
-					"s3": {
-						"bucket": "clevercanyon",
-						"cdn_domain": "cdn.clevercanyon.com"
-					}
-				}
-			}
-		},
-		"props-dev": {
-			"dev_json_map": {
-				"brand": {
-					"aws": {
-						"s3": {
-							"hash_hmac_key_path": "clevercanyon.aws.s3.hash_hmac_key"
+	"extra"             : {
+		"clevercanyon" : {
+			"&" : {
+				"brand"                   : {
+					"data" : {
+						"slug" : "clevercanyon"
+					},
+					"aws"  : {
+						"s3" : {
+							"bucket"     : "clevercanyon",
+							"cdn_domain" : "cdn.clevercanyon.com"
 						}
+					}
+				},
+				"post_update_cmd_handler" : {
+					"symlink_local_packages" : {
+						"vendor"       : [
+							"clevercanyon/php-chalk",
+							"clevercanyon/php-js-standards",
+							"clevercanyon/php-js-utilities",
+							"clevercanyon/php-js-utilities-dev"
+						],
+						"node_modules" : [
+							"@clevercanyon/php-js-utilities-dev-npm"
+						]
 					}
 				}
 			}
