@@ -61,7 +61,8 @@
 							"clevercanyon/php-chalk",
 							"clevercanyon/php-js-standards",
 							"clevercanyon/php-js-utilities",
-							"clevercanyon/php-js-utilities-dev"
+							"clevercanyon/php-js-utilities-dev",
+							"clevercanyon/php-js-utilities-dev-npm"
 						],
 						"node_modules" : [
 							"@clevercanyon/php-js-utilities-dev-npm"

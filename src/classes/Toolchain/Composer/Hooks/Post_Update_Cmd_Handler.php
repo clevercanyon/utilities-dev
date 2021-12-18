@@ -231,8 +231,11 @@ class Post_Update_Cmd_Handler extends Base {
 							throw new Exception( 'Unexpected `devDependencies` in: `' . $_to_path . '`.' );
 						}
 						foreach ( $_from_path_json->devDependencies as $_package => $_version ) {
-							$_to_path_json->devDependencies              ??= (object) [];
-							$_to_path_json->devDependencies->{$_package} = $_version;
+							$_to_path_json->devDependencies ??= (object) [];
+
+							if ( $this->project->name !== $_package && '@' . $this->project->name !== $_package ) {
+								$_to_path_json->devDependencies->{$_package} = $_version;
+							} // ^ Don't add a circular dependency on itself!
 						}
 						if ( isset( $_to_path_json->devDependencies ) ) {
 							$_to_path_json->devDependencies = U\Obj::sort_by( 'prop', $_to_path_json->devDependencies );
