@@ -71,6 +71,7 @@ class Post_Update_Cmd_Handler extends Base {
 			$this->project = new Project( getcwd() );
 			$this->maybe_symlink_local_repos();
 			$this->maybe_setup_dotfiles();
+			$this->maybe_run_npm_update();
 			U\CLI::exit_status( 0 );
 
 		} catch ( \Throwable $exception ) {
@@ -250,6 +251,19 @@ class Post_Update_Cmd_Handler extends Base {
 						throw new Exception( 'Failed to setup dotfile: `' . $_to_path . '`.' );
 					}
 			}
+		}
+	}
+
+	/**
+	 * Maybe run NPM updates.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @throws Exception On any failure.
+	 */
+	protected function maybe_run_npm_update() : void {
+		if ( $this->project->has_file( 'package.json' ) ) {
+			U\CLI::run( [ 'npm', 'update' ], $this->project->dir );
 		}
 	}
 }
