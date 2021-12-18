@@ -16,11 +16,12 @@
 		"optimize-autoloader" : true
 	},
 	"require"           : {
-		"php"                           : "^7.4 || ^8.0",
-		"aws/aws-sdk-php"               : "^3.2",
-		"phpunit/phpunit"               : "^9.5",
-		"clevercanyon/php-js-standards" : "dev-main",
-		"clevercanyon/php-js-utilities" : "dev-main"
+		"php"                                   : "^7.4 || ^8.0",
+		"aws/aws-sdk-php"                       : "^3.2",
+		"phpunit/phpunit"                       : "^9.5",
+		"clevercanyon/php-js-standards"         : "dev-main",
+		"clevercanyon/php-js-utilities"         : "dev-main",
+		"clevercanyon/php-js-utilities-dev-npm" : "dev-main"
 	},
 	"autoload"          : {
 		"psr-4" : {

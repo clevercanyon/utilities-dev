@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ffb906a0eeca2de2ecaed3fab584e628",
+    "content-hash": "b0b07438cc66235e69098ec593404035",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -283,6 +283,55 @@
                 "source": "https://github.com/clevercanyon/php-js-utilities/tree/main"
             },
             "time": "2021-12-13T08:34:55+00:00"
+        },
+        {
+            "name": "clevercanyon/php-js-utilities-dev-npm",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/clevercanyon/php-js-utilities-dev-npm.git",
+                "reference": "98fce79cef2aa3f0dcc4434929e6ae2e51b2db20"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/clevercanyon/php-js-utilities-dev-npm/zipball/98fce79cef2aa3f0dcc4434929e6ae2e51b2db20",
+                "reference": "98fce79cef2aa3f0dcc4434929e6ae2e51b2db20",
+                "shasum": ""
+            },
+            "require": {
+                "clevercanyon/php-js-utilities-dev": "dev-main"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "clevercanyon": {
+                    "@extends-packages": [
+                        "clevercanyon/php-js-utilities-dev"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Clever_Canyon\\Utilities_Dev_Npm\\": "./src/classes"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "CLEVER CANYON",
+                    "homepage": "https://clevercanyon.com",
+                    "role": "organization"
+                }
+            ],
+            "description": "Intended for internal company use only. CLEVER CANYON's dev utilities are for PHP/JS development.",
+            "support": {
+                "issues": "https://github.com/clevercanyon/php-js-utilities-dev-npm/issues",
+                "source": "https://github.com/clevercanyon/php-js-utilities-dev-npm/tree/main"
+            },
+            "time": "2021-12-18T10:48:30+00:00"
         },
         {
             "name": "dealerdirect/phpcodesniffer-composer-installer",
@@ -3517,7 +3566,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "clevercanyon/php-js-standards": 20,
-        "clevercanyon/php-js-utilities": 20
+        "clevercanyon/php-js-utilities": 20,
+        "clevercanyon/php-js-utilities-dev-npm": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
