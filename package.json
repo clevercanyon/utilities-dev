@@ -4,9 +4,9 @@
     "name": "package",
     "author": {
         "name": "CLEVER CANYON",
-        "url": "https:\/\/clevercanyon.com"
+        "url": "https://clevercanyon.com"
     },
     "devDependencies": {
-        "@clevercanyon\/php-js-utilities-dev-npm": "latest"
+        "@clevercanyon/php-js-utilities-dev-npm": "latest"
     }
 }

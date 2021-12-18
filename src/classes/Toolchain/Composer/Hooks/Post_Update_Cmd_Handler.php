@@ -240,7 +240,7 @@ class Post_Update_Cmd_Handler extends Base {
 						if ( isset( $_to_path_json->devDependencies ) ) {
 							$_to_path_json->devDependencies = U\Obj::sort_by( 'prop', $_to_path_json->devDependencies );
 						}
-						if ( false === file_put_contents( $_to_path, json_encode( $_to_path_json, JSON_PRETTY_PRINT ) ) ) {
+						if ( false === file_put_contents( $_to_path, json_encode( $_to_path_json, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) ) ) {
 							throw new Exception( 'Failed to update `devDependencies` in: `' . $_to_path . '`.' );
 						}
 						break;
