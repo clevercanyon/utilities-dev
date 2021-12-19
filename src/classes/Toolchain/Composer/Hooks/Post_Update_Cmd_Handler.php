@@ -275,7 +275,7 @@ class Post_Update_Cmd_Handler extends Base {
 							} // Package should NOT depend on itself ^.
 						}
 						$_to_path_json->devDependencies      = U\Obj::sort_by( 'prop', $_to_path_json->devDependencies );
-						$_to_path_json->config->clevercanyon = U\Obj::merge( $_to_path_json->config->clevercanyon, $_from_path_json->config->clevercanyon );
+						$_to_path_json->config->clevercanyon = U\Ctn::merge( $_to_path_json->config->clevercanyon, $_from_path_json->config->clevercanyon );
 
 						if ( false === file_put_contents( $_to_path, json_encode( $_to_path_json, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) ) ) {
 							throw new Exception( 'Failed to update `devDependencies` in: `' . $_to_path . '`.' );

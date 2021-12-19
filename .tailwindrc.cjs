@@ -12,18 +12,21 @@
  * Instead of editing, please configure `composer.json`. See instructions below.
  * Instead of editing, please see source repository @ <https://git.io/JD8Zo>.
  */
+/* eslint-env node */
 
 /* @formatter:ignore
 -----------------------------------------------------------------------------------------------------------------------
-Example `extra.props-dev.tailwind` in `composer.json`:
+Example `extra.clevercanyon.&.tailwind` in `composer.json`:
 -----------------------------------------------------------------------------------------------------------------------
 "extra" : {
-	"props-dev" : {
-		"tailwind" : {
-			"theme" : {
-				"fontFamily" : {
-					"sans"  : [ "Georama", "sans-serif" ],
-					"serif" : [ "Georgia", "serif" ]
+	"clevercanyon" : {
+		"&" : {
+			"tailwind" : {
+				"theme" : {
+					"fontFamily" : {
+						"sans"  : [ "Georama", "sans-serif" ],
+						"serif" : [ "Georgia", "serif" ]
+					}
 				}
 			}
 		}
@@ -32,10 +35,11 @@ Example `extra.props-dev.tailwind` in `composer.json`:
 -----------------------------------------------------------------------------------------------------------------------
 Example `index.scss` starter file contents:
 -----------------------------------------------------------------------------------------------------------------------
+@import 'https://fonts.googleapis.com/css2?family=Georama:ital,wght@0,100..900;1,100..900&display=swap';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import 'https://fonts.googleapis.com/css2?family=Georama:ital,wght@0,100..900;1,100..900&display=swap';
 ------------------------------------------------------------------------------------------------- @formatter:/ignore */
 
 const path = require( 'path' );
@@ -46,8 +50,8 @@ module.exports = ( () => {
 		'composer.json' : {},
 		'package.json'  : {},
 	};
-	try { file[ 'composer.json' ] = require( '../composer.json' ); } catch ( e ) {}
-	try { file[ 'package.json' ] = require( '../package.json' ); } catch ( e ) {}
+	try { file[ 'composer.json' ] = require( './composer.json' ); } catch ( e ) {}
+	try { file[ 'package.json' ] = require( './package.json' ); } catch ( e ) {}
 
 	return mc.merge(
 		{
@@ -59,7 +63,7 @@ module.exports = ( () => {
 			},
 			content : [ './src/{**/*,**/.*,.*,*}.{md,xml,htm,html,php,jsx,js,cjs,tsx,ts,cts}' ],
 		},
-		file[ 'composer.json' ]?.extra?.[ 'props-dev' ]?.tailwind || {},
-		file[ 'package.json' ]?.config?.[ 'props-dev' ]?.tailwind || {},
+		file[ 'composer.json' ]?.extra?.clevercanyon?.[ '&' ]?.tailwind || {},
+		file[ 'package.json' ]?.config?.clevercanyon?.[ '&' ]?.tailwind || {},
 	);
 } )();

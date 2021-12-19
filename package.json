@@ -8,5 +8,10 @@
     },
     "devDependencies": {
         "@clevercanyon/php-js-utilities-dev-npm": "latest"
+    },
+    "config": {
+        "clevercanyon": {
+            "&": {}
+        }
     }
 }
