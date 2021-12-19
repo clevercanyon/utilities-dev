@@ -97,7 +97,7 @@ class Project extends Base {
 	public function __construct( string $dir ) {
 		parent::__construct();
 
-		# Validate directory.
+		// Validate directory.
 
 		$this->dir  = U\Fs::normalize( $dir );
 		$this->file = rtrim( $this->dir, '/' ) . '/composer.json';
@@ -108,7 +108,7 @@ class Project extends Base {
 		if ( ! is_file( $this->file ) ) {
 			throw new Exception( 'Missing `Project->file`.' );
 		}
-		# Validate JSON data.
+		// Validate JSON data.
 
 		$this->dev_json = Common::dev_json( null, 'clevercanyon' );
 		$this->json     = Common::composer_json( $this->dir, 'clevercanyon' );
@@ -116,14 +116,14 @@ class Project extends Base {
 		if ( ! isset( $this->json->name, $this->json->extra ) ) {
 			throw new Exception( 'Missing or extremely incomplete `Project->json` file.' );
 		}
-		# Validate name property.
+		// Validate name property.
 
 		$this->name = strval( $this->json->name );
 
 		if ( ! $this->name || ! preg_match( Common::COMPOSER_PACKAGE_NAME_REGEXP, $this->name ) ) {
 			throw new Exception( 'Missing or invalid characters in `Project->name`. Must match: `' . Common::COMPOSER_PACKAGE_NAME_REGEXP . '`.' );
 		}
-		# Validate brand properties.
+		// Validate brand properties.
 
 		$this->brand_slug = strval( U\Obj::get_prop( $this->json->extra, '&.brand.data.slug' ) );
 		$this->brand_var  = str_replace( '-', '_', $this->brand_slug );
@@ -131,7 +131,7 @@ class Project extends Base {
 		if ( ! $this->brand_slug || ! $this->brand_var ) {
 			throw new Exception( 'Missing `Project->brand_slug|brand_var`.' );
 		}
-		# Validate WordPress plugin/theme data.
+		// Validate WordPress plugin/theme data.
 
 		if ( $this->is_wp_plugin() && ! $this->wp_plugin_data() ) {
 			throw new Exception( 'Missing or incomplete `Project->wp_plugin_data()`.' );

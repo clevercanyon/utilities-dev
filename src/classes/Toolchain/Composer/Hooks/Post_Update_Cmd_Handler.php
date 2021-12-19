@@ -22,6 +22,16 @@ use Clever_Canyon\Utilities_Dev\Toolchain\Composer\{Project, Utilities};
 use Clever_Canyon\Utilities\OOP\Version_1_0_0\{CLI_Tool_Base as Base};
 
 /**
+ * PHPCS rule exceptions.
+ *
+ * @since 2021-12-15
+ *
+ * @note  We need to access camelCase props below.
+ * phpcs:disable WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+ * phpcs:disable WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+ */
+
+/**
  * On `post-update-cmd` hook.
  *
  * @since 2021-12-15
@@ -74,8 +84,8 @@ class Post_Update_Cmd_Handler extends Base {
 			$this->maybe_run_npm_update();
 			U\CLI::exit_status( 0 );
 
-		} catch ( \Throwable $exception ) {
-			U\CLI::error( $exception->getMessage() );
+		} catch ( \Throwable $throwable ) {
+			U\CLI::error( $throwable->__toString() );
 			U\CLI::exit_status( 1 );
 		}
 	}
@@ -118,7 +128,7 @@ class Post_Update_Cmd_Handler extends Base {
 			}
 			foreach ( $_package_names as $_package_name ) {
 				switch ( $_packages_dir ) {
-					case 'node_modules' :
+					case 'node_modules':
 						if ( ! $_package_name
 							|| ! is_string( $_package_name )
 							|| ! preg_match( Common::NPM_PACKAGE_NAME_REGEXP, $_package_name )
@@ -214,39 +224,65 @@ class Post_Update_Cmd_Handler extends Base {
 				throw new Exception( 'Unable to update existing dotfile: `' . $_to_path . '`.' );
 			}
 			switch ( $_from_subpath ) {
-				case 'package.json' : // If already exists, update `devDependencies` only.
+				case 'package.json': // If exists, update. Do NOT overwrite.
 					if ( is_file( $_to_path ) ) {
+						// Parse JSON objects.
+
 						$_from_path_json = json_decode( file_get_contents( $_from_path ) );
 						$_to_path_json   = json_decode( file_get_contents( $_to_path ) );
+
+						// Validate `$_from_path_json`.
 
 						if ( ! is_object( $_from_path_json ) ) {
 							throw new Exception( 'Unable to parse JSON in: `' . $_from_path . '`.' );
 						}
-						if ( ! is_object( $_from_path_json->devDependencies ?? null ) ) {
+						$_from_path_json->devDependencies      ??= (object) [];
+						$_from_path_json->config               ??= (object) [];
+						$_from_path_json->config->clevercanyon ??= (object) [];
+
+						if ( ! is_object( $_from_path_json->devDependencies ) ) {
 							throw new Exception( 'Unexpected `devDependencies` in: `' . $_from_path . '`.' );
 						}
+						if ( ! is_object( $_from_path_json->config ) ) {
+							throw new Exception( 'Unexpected `config` in: `' . $_from_path . '`.' );
+						}
+						if ( ! is_object( $_from_path_json->config->clevercanyon ) ) {
+							throw new Exception( 'Unexpected `config->clevercanyon` in: `' . $_from_path . '`.' );
+						}
+						// Validate `$_to_path_json`.
+
 						if ( ! is_object( $_to_path_json ) ) {
 							throw new Exception( 'Unable to parse JSON in: `' . $_to_path . '`.' );
 						}
-						if ( isset( $_to_path_json->devDependencies ) && ! is_object( $_to_path_json->devDependencies ) ) {
+						$_to_path_json->devDependencies      ??= (object) [];
+						$_to_path_json->config               ??= (object) [];
+						$_to_path_json->config->clevercanyon ??= (object) [];
+
+						if ( ! is_object( $_to_path_json->devDependencies ) ) {
 							throw new Exception( 'Unexpected `devDependencies` in: `' . $_to_path . '`.' );
 						}
-						foreach ( $_from_path_json->devDependencies as $_package => $_version ) {
-							$_to_path_json->devDependencies ??= (object) [];
+						if ( ! is_object( $_to_path_json->config ) ) {
+							throw new Exception( 'Unexpected `config` in: `' . $_to_path . '`.' );
+						}
+						if ( ! is_object( $_to_path_json->config->clevercanyon ) ) {
+							throw new Exception( 'Unexpected `config->clevercanyon` in: `' . $_to_path . '`.' );
+						}
+						// Update `$_to_path_json`.
 
-							if ( $this->project->name !== $_package && '@' . $this->project->name !== $_package ) {
+						foreach ( $_from_path_json->devDependencies as $_package => $_version ) {
+							if ( '@' . $this->project->name !== $_package ) {
 								$_to_path_json->devDependencies->{$_package} = $_version;
-							} // ^ Don't add a circular dependency on itself!
+							} // Package should NOT depend on itself ^.
 						}
-						if ( isset( $_to_path_json->devDependencies ) ) {
-							$_to_path_json->devDependencies = U\Obj::sort_by( 'prop', $_to_path_json->devDependencies );
-						}
+						$_to_path_json->devDependencies      = U\Obj::sort_by( 'prop', $_to_path_json->devDependencies );
+						$_to_path_json->config->clevercanyon = U\Obj::merge( $_to_path_json->config->clevercanyon, $_from_path_json->config->clevercanyon );
+
 						if ( false === file_put_contents( $_to_path, json_encode( $_to_path_json, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) ) ) {
 							throw new Exception( 'Failed to update `devDependencies` in: `' . $_to_path . '`.' );
 						}
 						break;
-					}
-				default : // Everything falls through unless there's a `break` above.
+					} // PLEASE NOTE THE FALLTHROUGH FROM ABOVE!
+				default: // Everything falls through unless there's a `break` above.
 					if ( ! U\Fs::copy( $_from_path, $_to_path ) ) {
 						throw new Exception( 'Failed to setup dotfile: `' . $_to_path . '`.' );
 					}

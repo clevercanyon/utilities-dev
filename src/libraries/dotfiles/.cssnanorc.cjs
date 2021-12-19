@@ -11,6 +11,7 @@
  * This file and the contents of it are updated automatically.
  * Instead of editing, please see source repository @ <https://git.io/JD8Zo>.
  */
+/* eslint-env node */
 
 module.exports = {
 	preset : [

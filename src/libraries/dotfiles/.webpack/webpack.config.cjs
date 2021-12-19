@@ -10,15 +10,18 @@
  * Instead of editing, please configure `composer.json`. See instructions below.
  * Instead of editing, please see source repository @ <https://git.io/JD8Zo>.
  */
+/* eslint-env node */
 
 /* @formatter:ignore
 -----------------------------------------------------------------------------------------------------------------------
-Example `extra.props-dev.webpack` using `composer.json`:
+Example `extra.clevercanyon.&.webpack` using `composer.json`:
 -----------------------------------------------------------------------------------------------------------------------
 "extra" : {
-	"props-dev" : {
-		"webpack" : {
-			"assetDirs" : [ "./src/assets" ]
+	"clevercanyon" : {
+		"&" : {
+			"webpack" : {
+				"assetDirs" : [ "./src/assets" ]
+			}
 		}
 	}
 }
@@ -46,11 +49,11 @@ module.exports = ( env, argv ) => {
 	const configs = [];
 	const config  = mc.merge(
 		{
-			assetDirs : [ './src/assets' ],
-			config    : {},
+			assetDirs : [ './src/assets' ], // Resolved below.
+			config    : {}, // Merges into all base config values.
 		},
-		file[ 'composer.json' ]?.extra?.[ 'props-dev' ]?.webpack || {},
-		file[ 'package.json' ]?.config?.[ 'props-dev' ]?.webpack || {},
+		file[ 'composer.json' ]?.extra?.clevercanyon?.[ '&' ]?.webpack || {},
+		file[ 'package.json' ]?.config?.clevercanyon?.[ '&' ]?.webpack || {},
 	);
 
 	( config.assetDirs || [] ).forEach( ( assetsDir ) => {

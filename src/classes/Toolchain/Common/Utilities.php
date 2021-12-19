@@ -35,10 +35,10 @@ class Utilities extends Base {
 	/**
 	 * Composer package name max bytes.
 	 *
-	 * @since    2021-12-15
+	 * @since 2021-12-15
 	 *
-	 * @internal Composer seemingly doesn't have or document a limit.
-	 *           We'll use the same limit as NPM does, which is 214 characters.
+	 * @see   Composer seemingly doesn't have or document a limit.
+	 *        We'll use the same limit as NPM does, which is 214 characters.
 	 */
 	public const COMPOSER_PACKAGE_NAME_MAX_BYTES = 214;
 
@@ -54,9 +54,9 @@ class Utilities extends Base {
 	/**
 	 * NPM package name max bytes.
 	 *
-	 * @since    2021-12-15
+	 * @since 2021-12-15
 	 *
-	 * @see      https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name
+	 * @see   https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name
 	 */
 	public const NPM_PACKAGE_NAME_MAX_BYTES = 214;
 
@@ -87,7 +87,7 @@ class Utilities extends Base {
 		$dir  = U\Fs::normalize( $dir );
 		$file = rtrim( $dir, '/' ) . '/.dev.json';
 
-		if ( null !== ( $cache = &static::static_cache( [ __FUNCTION__, $dir, $namespace ] ) ) ) {
+		if ( null !== ( $cache = &static::oops_cache( [ __FUNCTION__, $dir, $namespace ] ) ) ) {
 			return $cache; // Cached already.
 		}
 		if ( ! $dir || ! $file ) {
@@ -128,7 +128,7 @@ class Utilities extends Base {
 	 * @return \StdClass Object with `composer.json` properties from the given `$dir` parameter.
 	 */
 	public static function composer_json( string $dir, /* string|null */ ?string $namespace = null, /* \StdClass|null */ ?\StdClass $_r = null ) : \StdClass {
-		# Setup variables.
+		// Setup variables.
 
 		$is_recursive = isset( $_r );
 		$_r           ??= (object) [];
@@ -136,15 +136,15 @@ class Utilities extends Base {
 		$dir  = U\Fs::normalize( $dir );
 		$file = rtrim( $dir, '/' ) . '/composer.json';
 
-		# Check the cache.
+		// Check the cache.
 
 		if ( ! $is_recursive ) {
 			$cache_key = [ __FUNCTION__, $dir, $namespace ];
-			if ( null !== ( $cache = &static::static_cache( $cache_key ) ) ) {
+			if ( null !== ( $cache = &static::oops_cache( $cache_key ) ) ) {
 				return $cache; // Cached already.
 			}
 		}
-		# Validate, setup, early returns.
+		// Validate, setup, early returns.
 
 		if ( ! $dir || ! $file ) {
 			throw new Exception( 'Missing dir: `' . $dir . '` or file: `' . $file . '`.' );
@@ -164,15 +164,15 @@ class Utilities extends Base {
 		if ( $namespace && ! is_object( $json->extra->{$namespace} ?? null ) ) {
 			$json->extra->{$namespace} = (object) [];
 		}
-		# Maybe handles `@extends-packages` directive(s) recursively.
+		// Maybe handles `@extends-packages` directive(s) recursively.
 
 		if ( $namespace && property_exists( $json->extra->{$namespace}, '@extends-packages' ) ) {
-			# Validate `@extends-packages` directive.
+			// Validate `@extends-packages` directive.
 
 			if ( ! is_array( $json->extra->{$namespace}->{'@extends-packages'} ) ) {
 				throw new Exception( 'Unexpected `@extends-packages` directive in: `' . $file . '`. Must be array.' );
 			}
-			# Compile packages that we need to extend, recursively.
+			// Compile packages that we need to extend, recursively.
 
 			$_extends_json_extra_namespace = (object) []; // Initialize.
 
@@ -197,16 +197,16 @@ class Utilities extends Base {
 					$_extends_json_extra_namespace = U\Ctn::merge( $_extends_json_extra_namespace, $_package_json->extra->{$namespace} );
 				}
 			}
-			# Merge into everything we're extending.
+			// Merge into everything we're extending.
 
 			if ( $_extends_json_extra_namespace ) {
 				$json->extra->{$namespace} = U\Ctn::merge( $_extends_json_extra_namespace, $json->extra->{$namespace} );
 			}
-			# Drop the `@extends-packages` directive now.
+			// Drop the `@extends-packages` directive now.
 
 			unset( $json->extra->{$namespace}->{'@extends-packages'} );
 		}
-		# Maybe bump namespace up into extra props.
+		// Maybe bump namespace up into extra props.
 
 		if ( ! $is_recursive && $namespace ) {
 			$extra_env_vars = [
@@ -219,7 +219,7 @@ class Utilities extends Base {
 			$json->extra->{$namespace} = U\Ctn::resolve_extends( $json->extra->{$namespace} );
 			$json->extra               = $json->extra->{$namespace};
 		}
-		# Return cache.
+		// Return cache.
 
 		return $cache = $json;
 	}
