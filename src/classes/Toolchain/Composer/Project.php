@@ -1,5 +1,6 @@
 <?php
-/** CLEVER CANYON™ <https://clevercanyon.com>
+/**
+ * CLEVER CANYON™ {@see https://clevercanyon.com}
  *
  *  CCCCC  LL      EEEEEEE VV     VV EEEEEEE RRRRRR      CCCCC    AAA   NN   NN YY   YY  OOOOO  NN   NN ™
  * CC      LL      EE      VV     VV EE      RR   RR    CC       AAAAA  NNN  NN YY   YY OO   OO NNN  NN
@@ -7,18 +8,32 @@
  * CC      LL      EE        VV VV   EE      RR  RR     CC      AAAAAAA NN  NNN   YYY   OO   OO NN  NNN
  *  CCCCC  LLLLLLL EEEEEEE    VVV    EEEEEEE RR   RR     CCCCC  AA   AA NN   NN   YYY    OOOO0  NN   NN
  */
+// <editor-fold desc="Strict types, namespace, use statements, and other headers.">
+
+/**
+ * Declarations & namespace.
+ *
+ * @since 2021-12-25
+ */
+declare( strict_types = 1 ); // ｡･:*:･ﾟ★.
 namespace Clever_Canyon\Utilities_Dev\Toolchain\Composer;
 
 /**
- * Dependencies.
+ * Utilities.
  *
  * @since 2021-12-15
  */
-use Clever_Canyon\Utilities\OOPs\Version_1_0_0 as U;
-use Clever_Canyon\Utilities\OOP\Version_1_0_0\Exception;
+use Clever_Canyon\Utilities\OOPs\{Version_1_0_0 as U};
+use Clever_Canyon\Utilities\OOP\Version_1_0_0\{Exception};
 
-use Clever_Canyon\Utilities_Dev\Toolchain\Common\{Utilities as Common};
-use Clever_Canyon\Utilities\OOP\Version_1_0_0\{Base};
+/**
+ * Toolchain.
+ *
+ * @since 2021-12-15
+ */
+use Clever_Canyon\Utilities_Dev\Toolchain\{Tools as T};
+
+// </editor-fold>
 
 /**
  * Project.
@@ -35,7 +50,7 @@ use Clever_Canyon\Utilities\OOP\Version_1_0_0\{Base};
  * @property-read $brand_slug
  * @property-read $brand_var
  */
-class Project extends Base {
+class Project extends \Clever_Canyon\Utilities\OOP\Version_1_0_0\Base {
 	/**
 	 * Directory.
 	 *
@@ -55,14 +70,14 @@ class Project extends Base {
 	 *
 	 * @since 2021-12-15
 	 */
-	protected \StdClass $json;
+	protected \stdClass $json;
 
 	/**
 	 * Dev.json props.
 	 *
 	 * @since 2021-12-15
 	 */
-	protected \StdClass $dev_json;
+	protected \stdClass $dev_json;
 
 	/**
 	 * Name.
@@ -100,7 +115,7 @@ class Project extends Base {
 		// Validate directory.
 
 		$this->dir  = U\Fs::normalize( $dir );
-		$this->file = rtrim( $this->dir, '/' ) . '/composer.json';
+		$this->file = U\Dir::join( $this->dir, '/composer.json' );
 
 		if ( ! $this->dir ) {
 			throw new Exception( 'Missing `Project->dir`.' );
@@ -110,8 +125,8 @@ class Project extends Base {
 		}
 		// Validate JSON data.
 
-		$this->dev_json = Common::dev_json( null, 'clevercanyon' );
-		$this->json     = Common::composer_json( $this->dir, 'clevercanyon' );
+		$this->dev_json = T\Dev::json( null, 'clevercanyon' );
+		$this->json     = T\Composer::json( $this->dir, 'clevercanyon' );
 
 		if ( ! isset( $this->json->name, $this->json->extra ) ) {
 			throw new Exception( 'Missing or extremely incomplete `Project->json` file.' );
@@ -120,8 +135,8 @@ class Project extends Base {
 
 		$this->name = strval( $this->json->name );
 
-		if ( ! $this->name || ! preg_match( Common::COMPOSER_PACKAGE_NAME_REGEXP, $this->name ) ) {
-			throw new Exception( 'Missing or invalid characters in `Project->name`. Must match: `' . Common::COMPOSER_PACKAGE_NAME_REGEXP . '`.' );
+		if ( ! $this->name || ! preg_match( T\Composer::PACKAGE_NAME_REGEXP, $this->name ) ) {
+			throw new Exception( 'Missing or invalid characters in `Project->name`. Must match: `' . T\Composer::PACKAGE_NAME_REGEXP . '`.' );
 		}
 		// Validate brand properties.
 
@@ -151,7 +166,7 @@ class Project extends Base {
 	 * @return bool True if has directory.
 	 */
 	public function has_dir( string $subpath ) : bool {
-		return is_dir( $this->dir . '/' . ltrim( U\Fs::normalize( $subpath ), '/' ) );
+		return is_dir( U\Dir::join( $this->dir, '/' . $subpath ) );
 	}
 
 	/**
@@ -164,7 +179,7 @@ class Project extends Base {
 	 * @return bool True if has file.
 	 */
 	public function has_file( string $subpath ) : bool {
-		return is_file( $this->dir . '/' . ltrim( U\Fs::normalize( $subpath ), '/' ) );
+		return is_file( U\Dir::join( $this->dir, '/' . $subpath ) );
 	}
 
 	/**
@@ -206,11 +221,11 @@ class Project extends Base {
 	 * @since                 1.0.0
 	 *
 	 * @throws Exception On any failure.
-	 * @return \StdClass|false Plugin data.
+	 * @return \stdClass|false Plugin data.
 	 *
-	 * @see                   \WP_Groove\Framework\Plugin\Base::__construct()
+	 * @see                   \WP_Groove\Framework\Plugin\Version_1_0_0\Base::__construct()
 	 */
-	public function wp_plugin_data() /* : \StdClass|false */ {
+	public function wp_plugin_data() /* : \stdClass|false */ {
 		if ( null !== ( $cache = &$this->oop_cache( __FUNCTION__ ) ) ) {
 			return $cache; // Cached already.
 		}
@@ -219,9 +234,9 @@ class Project extends Base {
 		}
 		$data = (object) [];
 
-		$data->file        = U\Fs::normalize( $this->dir . '/trunk/plugin.php' );
-		$data->readme_file = U\Fs::normalize( $this->dir . '/trunk/readme.txt' );
-		$data->dir         = dirname( $data->file );
+		$data->file        = U\Dir::join( $this->dir, '/trunk/plugin.php' );
+		$data->readme_file = U\Dir::join( $this->dir, '/trunk/readme.txt' );
+		$data->dir         = U\Dir::name( $data->file );
 
 		if ( ! is_dir( $data->dir )
 			|| ! is_readable( $data->dir )
@@ -242,13 +257,13 @@ class Project extends Base {
 		}
 		$data->basename = $_p[ count( $_p ) - 3 ] . '/' . $_p[ count( $_p ) - 2 ];
 
-		$data->slug = basename( dirname( $data->basename ) );
+		$data->slug = basename( U\Dir::name( $data->basename ) );
 		$data->var  = str_replace( '-', '_', $data->slug );
 
 		$data->brand_slug = &$this->brand_slug;
 		$data->brand_var  = &$this->brand_var;
 
-		$data->unbranded_slug = preg_replace( '/^' . preg_quote( $data->brand_slug . '-', '/' ) . '/ui', '', $data->slug );
+		$data->unbranded_slug = preg_replace( '/^' . U\Str::esc_reg( $data->brand_slug . '-' ) . '/ui', '', $data->slug );
 		$data->unbranded_var  = str_replace( '-', '_', $data->unbranded_slug );
 
 		$data->headers = $this->wp_plugin_file_headers();
@@ -262,11 +277,11 @@ class Project extends Base {
 	 * @since                 1.0.0
 	 *
 	 * @throws Exception On any failure.
-	 * @return \StdClass|null Plugin file headers.
+	 * @return \stdClass|null Plugin file headers.
 	 *
 	 * @see                   https://developer.wordpress.org/reference/functions/get_plugin_data/
 	 */
-	protected function wp_plugin_file_headers() /* : \StdClass|null */ : ?\StdClass {
+	protected function wp_plugin_file_headers() /* : \stdClass|null */ : ?\stdClass {
 		if ( ! $this->is_wp_plugin() ) {
 			return null; // Not possible.
 		}
@@ -305,13 +320,13 @@ class Project extends Base {
 				'update_url' => 'Update URI',
 			],
 		];
-		$file = U\Fs::normalize( $this->dir . '/trunk/plugin.php' );
+		$file = U\Dir::join( $this->dir, '/trunk/plugin.php' );
 
 		$first_8kbs = file_get_contents( $file, false, null, 0, 8192 );
 		$first_8kbs = str_replace( "\r", "\n", $first_8kbs );
 
 		foreach ( $data->_map as $_prop => $_header ) {
-			if ( preg_match( '/^(?:[ \t]*\<\?php)?[ \t\/*#@]*' . preg_quote( $_header, '/' ) . '\:(.*)$/mi', $first_8kbs, $_m ) && $_m[ 1 ] ) {
+			if ( preg_match( '/^(?:[ \t]*\<\?php)?[ \t\/*#@]*' . U\Str::esc_reg( $_header ) . '\:(.*)$/mi', $first_8kbs, $_m ) && $_m[ 1 ] ) {
 				$data->{$_prop} = trim( preg_replace( '/\s*(?:\*\/|\?\>).*/', '', $_m[ 1 ] ) );
 			} else {
 				$data->{$_prop} = '';
@@ -329,11 +344,11 @@ class Project extends Base {
 	 * @since                 1.0.0
 	 *
 	 * @throws Exception On any failure.
-	 * @return \StdClass|false Theme data.
+	 * @return \stdClass|false Theme data.
 	 *
-	 * @see                   \WP_Groove\Framework\Theme\Base::__construct()
+	 * @see                   \WP_Groove\Framework\Theme\Version_1_0_0\Base::__construct()
 	 */
-	public function wp_theme_data() /* : \StdClass|false */ {
+	public function wp_theme_data() /* : \stdClass|false */ {
 		if ( null !== ( $cache = &$this->oop_cache( __FUNCTION__ ) ) ) {
 			return $cache; // Cached already.
 		}
@@ -342,11 +357,11 @@ class Project extends Base {
 		}
 		$data = (object) [];
 
-		$data->file           = U\Fs::normalize( $this->dir . '/trunk/theme.php' );
-		$data->functions_file = U\Fs::normalize( $this->dir . '/trunk/functions.php' );
-		$data->style_file     = U\Fs::normalize( $this->dir . '/trunk/style.css' );
-		$data->readme_file    = U\Fs::normalize( $this->dir . '/trunk/readme.txt' );
-		$data->dir            = dirname( $data->file );
+		$data->file           = U\Dir::join( $this->dir, '/trunk/theme.php' );
+		$data->functions_file = U\Dir::join( $this->dir, '/trunk/functions.php' );
+		$data->style_file     = U\Dir::join( $this->dir, '/trunk/style.css' );
+		$data->readme_file    = U\Dir::join( $this->dir, '/trunk/readme.txt' );
+		$data->dir            = U\Dir::name( $data->file );
 
 		if ( ! is_dir( $data->dir )
 			|| ! is_readable( $data->dir )
@@ -373,13 +388,13 @@ class Project extends Base {
 		}
 		$data->basename = $_p[ count( $_p ) - 3 ] . '/' . $_p[ count( $_p ) - 2 ];
 
-		$data->slug = basename( dirname( $data->basename ) );
+		$data->slug = basename( U\Dir::name( $data->basename ) );
 		$data->var  = str_replace( '-', '_', $data->slug );
 
 		$data->brand_slug = &$this->brand_slug;
 		$data->brand_var  = &$this->brand_var;
 
-		$data->unbranded_slug = preg_replace( '/^' . preg_quote( $data->brand_slug . '-', '/' ) . '/ui', '', $data->slug );
+		$data->unbranded_slug = preg_replace( '/^' . U\Str::esc_reg( $data->brand_slug . '-' ) . '/ui', '', $data->slug );
 		$data->unbranded_var  = str_replace( '-', '_', $data->unbranded_slug );
 
 		$data->headers = $this->wp_theme_file_headers();
@@ -393,11 +408,11 @@ class Project extends Base {
 	 * @since                 1.0.0
 	 *
 	 * @throws Exception On any failure.
-	 * @return \StdClass|null Theme file headers.
+	 * @return \stdClass|null Theme file headers.
 	 *
 	 * @see                   https://developer.wordpress.org/reference/classes/wp_theme/
 	 */
-	protected function wp_theme_file_headers() /* : \StdClass|null */ : ?\StdClass {
+	protected function wp_theme_file_headers() /* : \stdClass|null */ : ?\stdClass {
 		if ( ! $this->is_wp_theme() ) {
 			return null; // Not possible.
 		}
@@ -439,13 +454,13 @@ class Project extends Base {
 				// ^ This header is not part of {@see \WP_Theme}, but here for consistency.
 			],
 		];
-		$file = U\Fs::normalize( $this->dir . '/trunk/theme.php' );
+		$file = U\Dir::join( $this->dir, '/trunk/theme.php' );
 
 		$first_8kbs = file_get_contents( $file, false, null, 0, 8192 );
 		$first_8kbs = str_replace( "\r", "\n", $first_8kbs );
 
 		foreach ( $data->_map as $_prop => $_header ) {
-			if ( preg_match( '/^(?:[ \t]*\<\?php)?[ \t\/*#@]*' . preg_quote( $_header, '/' ) . '\:(.*)$/mi', $first_8kbs, $_m ) && $_m[ 1 ] ) {
+			if ( preg_match( '/^(?:[ \t]*\<\?php)?[ \t\/*#@]*' . U\Str::esc_reg( $_header ) . '\:(.*)$/mi', $first_8kbs, $_m ) && $_m[ 1 ] ) {
 				$data->{$_prop} = trim( preg_replace( '/\s*(?:\*\/|\?\>).*/', '', $_m[ 1 ] ) );
 			} else {
 				$data->{$_prop} = '';
@@ -489,11 +504,12 @@ class Project extends Base {
 		$secret_key_prop = $this->brand_var . '.aws.credentials.secret_key';
 		$secret_key      = U\Obj::get_prop( $this->dev_json, $secret_key_prop );
 
-		if ( ! $access_key ) {
-			throw new Exception( 'Missing prop: `' . $access_key_prop . '` in: `~/.dev.json`.' );
-		}
-		if ( ! $secret_key ) {
-			throw new Exception( 'Missing prop: `' . $secret_key_prop . '` in: `~/.dev.json`.' );
+		if ( ! $access_key || ! $secret_key ) {
+			throw new Exception(
+				'Missing prop: `' . $access_key_prop . '` and/or `' . $secret_key_prop . '` in: `~/.dev.json`.' .
+				' Please contact support for help with AWS access. ' .
+				' We’ll also help you set up `~/.dev.json`.'
+			);
 		}
 		return [
 			'version'           => '2006-03-01',
@@ -525,6 +541,25 @@ class Project extends Base {
 	}
 
 	/**
+	 * Gets local WordPress public HTML directory.
+	 *
+	 * @since 2021-12-15
+	 *
+	 * @return string Local WordPress public HTML directory,
+	 *                else empty string if not available in `~/.dev.json`.
+	 */
+	public function local_wp_public_html_dir() : string {
+		$public_html_dir_prop = '&.local.wordpress.public_html_dir';
+		$public_html_dir      = U\Obj::get_prop( $this->dev_json, $public_html_dir_prop );
+		$public_html_dir      = U\Fs::normalize( $public_html_dir ?: '' );
+
+		if ( ! $public_html_dir || ! is_dir( $public_html_dir ) ) {
+			return ''; // Let this pass, as it's not vital to our needs right now.
+		}
+		return $public_html_dir;
+	}
+
+	/**
 	 * Gets local WordPress versions.
 	 *
 	 * @since 2021-12-15
@@ -533,21 +568,20 @@ class Project extends Base {
 	 * @return string Local WordPress version, else empty string if not available in `.dev.json`.
 	 */
 	public function local_wp_version() : string {
-		$public_html_dir_prop   = '&.local.wordpress.public_html_dir';
-		$public_html_dir        = U\Fs::normalize( U\Obj::get_prop( $this->dev_json, $public_html_dir_prop ) ?: '' );
-		$local_wp_versions_file = rtrim( $public_html_dir, '/' ) . '/wp-includes/version.php';
+		$public_html_dir = $this->local_wp_public_html_dir();
+		$___version_file = U\Dir::join( $public_html_dir, '/wp-includes/version.php' );
 
 		if ( ! $public_html_dir || ! is_dir( $public_html_dir ) ) {
 			return ''; // Let this pass, as it's not vital to our needs right now.
 		}
-		if ( ! is_readable( $local_wp_versions_file ) ) {
-			throw new Exception( 'Missing or unreadable local WP core file: `' . $local_wp_versions_file . '`.' );
+		if ( ! is_readable( $___version_file ) ) {
+			throw new Exception( 'Missing or unreadable local WP core file: `' . $___version_file . '`.' );
 		}
-		return ( function () use ( $local_wp_versions_file ) : string {
-			include $local_wp_versions_file;
+		return ( function () use ( $___version_file ) : string {
+			include $___version_file;
 
 			if ( empty( $wp_version ) || ! is_string( $wp_version ) ) {
-				throw new Exception( 'Missing or unexpected local `$wp_version` in: `' . $local_wp_versions_file . '`.' );
+				throw new Exception( 'Missing or unexpected local `$wp_version` in: `' . $___version_file . '`.' );
 			}
 			return $wp_version;
 		} )();
@@ -602,7 +636,7 @@ class Project extends Base {
 		];
 		if ( $this->is_wp_project() ) {
 			$config[ 'prune' ] = array_merge( $config[ 'prune' ], [
-				'/^(vendor)$/ui', // @todo Why is the above exception not impacting this?
+				'/^(vendor)$/ui',
 				'/^(readme)\.(md|txt|rtf)$/ui',
 			] );
 		}

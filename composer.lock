@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b57ec3e9c8b51b300015f9c50705bbd5",
+    "content-hash": "56f5de9a759fb8353d9c876d78e2f018",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -58,16 +58,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.208.5",
+            "version": "3.208.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "58fa9d8b522b0afa260299179ff950c783ff0ee1"
+                "reference": "41a800dd7cf5c4ac0ef9bf8db01e838ab6a3698c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/58fa9d8b522b0afa260299179ff950c783ff0ee1",
-                "reference": "58fa9d8b522b0afa260299179ff950c783ff0ee1",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/41a800dd7cf5c4ac0ef9bf8db01e838ab6a3698c",
+                "reference": "41a800dd7cf5c4ac0ef9bf8db01e838ab6a3698c",
                 "shasum": ""
             },
             "require": {
@@ -143,9 +143,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.208.5"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.208.7"
             },
-            "time": "2021-12-13T20:17:56+00:00"
+            "time": "2021-12-21T19:16:39+00:00"
         },
         {
             "name": "clevercanyon/php-chalk",
@@ -153,12 +153,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/clevercanyon/php-chalk.git",
-                "reference": "fe8bd24776efadf54941ce09a39e19d747b9aa18"
+                "reference": "db97e7fea2bf967b8338ab5cca7f5f9f58dfae4b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/clevercanyon/php-chalk/zipball/fe8bd24776efadf54941ce09a39e19d747b9aa18",
-                "reference": "fe8bd24776efadf54941ce09a39e19d747b9aa18",
+                "url": "https://api.github.com/repos/clevercanyon/php-chalk/zipball/db97e7fea2bf967b8338ab5cca7f5f9f58dfae4b",
+                "reference": "db97e7fea2bf967b8338ab5cca7f5f9f58dfae4b",
                 "shasum": ""
             },
             "require": {
@@ -203,7 +203,7 @@
                 "issues": "https://github.com/clevercanyon/php-chalk/issues",
                 "source": "https://github.com/clevercanyon/php-chalk/tree/main"
             },
-            "time": "2021-12-19T05:57:33+00:00"
+            "time": "2021-12-26T18:44:41+00:00"
         },
         {
             "name": "clevercanyon/php-js-standards",
@@ -211,12 +211,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/clevercanyon/php-js-standards.git",
-                "reference": "a8d6b6ebe420bdfcaa0d21f7aa85f10e42944f8b"
+                "reference": "7809869af4eca4b9c90e0baa0abd85707f2f227d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/clevercanyon/php-js-standards/zipball/a8d6b6ebe420bdfcaa0d21f7aa85f10e42944f8b",
-                "reference": "a8d6b6ebe420bdfcaa0d21f7aa85f10e42944f8b",
+                "url": "https://api.github.com/repos/clevercanyon/php-js-standards/zipball/7809869af4eca4b9c90e0baa0abd85707f2f227d",
+                "reference": "7809869af4eca4b9c90e0baa0abd85707f2f227d",
                 "shasum": ""
             },
             "require": {
@@ -260,7 +260,7 @@
                 "issues": "https://github.com/clevercanyon/php-js-standards/issues",
                 "source": "https://github.com/clevercanyon/php-js-standards/tree/main"
             },
-            "time": "2021-12-19T05:58:31+00:00"
+            "time": "2021-12-26T18:45:24+00:00"
         },
         {
             "name": "clevercanyon/php-js-utilities",
@@ -268,17 +268,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/clevercanyon/php-js-utilities.git",
-                "reference": "d9336792333f3aff9c3cc9e79c5505c40dd429a3"
+                "reference": "230d1335067359fa790daa502f7888b62d82bfc7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/clevercanyon/php-js-utilities/zipball/d9336792333f3aff9c3cc9e79c5505c40dd429a3",
-                "reference": "d9336792333f3aff9c3cc9e79c5505c40dd429a3",
+                "url": "https://api.github.com/repos/clevercanyon/php-js-utilities/zipball/230d1335067359fa790daa502f7888b62d82bfc7",
+                "reference": "230d1335067359fa790daa502f7888b62d82bfc7",
                 "shasum": ""
             },
             "require": {
                 "clevercanyon/php-chalk": "dev-main",
-                "php": "^7.4 || ^8.0",
+                "ext-json": "*",
+                "php": "^7.4 || ^8.0 || ^8.1",
                 "ulrichsg/getopt-php": "^3.4"
             },
             "require-dev": {
@@ -314,7 +315,7 @@
                 "issues": "https://github.com/clevercanyon/php-js-utilities/issues",
                 "source": "https://github.com/clevercanyon/php-js-utilities/tree/main"
             },
-            "time": "2021-12-19T05:56:47+00:00"
+            "time": "2021-12-26T18:46:14+00:00"
         },
         {
             "name": "clevercanyon/php-js-utilities-dev-npm",
@@ -904,9 +905,6 @@
             },
             "require": {
                 "php": "^7.1 || ^8.0"
-            },
-            "replace": {
-                "myclabs/deep-copy": "self.version"
             },
             "require-dev": {
                 "doctrine/collections": "^1.0",
@@ -1832,16 +1830,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.5.10",
+            "version": "9.5.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c814a05837f2edb0d1471d6e3f4ab3501ca3899a"
+                "reference": "2406855036db1102126125537adb1406f7242fdd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c814a05837f2edb0d1471d6e3f4ab3501ca3899a",
-                "reference": "c814a05837f2edb0d1471d6e3f4ab3501ca3899a",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2406855036db1102126125537adb1406f7242fdd",
+                "reference": "2406855036db1102126125537adb1406f7242fdd",
                 "shasum": ""
             },
             "require": {
@@ -1919,11 +1917,11 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.10"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.11"
             },
             "funding": [
                 {
-                    "url": "https://phpunit.de/donate.html",
+                    "url": "https://phpunit.de/sponsors.html",
                     "type": "custom"
                 },
                 {
@@ -1931,7 +1929,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-09-25T07:38:51+00:00"
+            "time": "2021-12-25T07:07:57+00:00"
         },
         {
             "name": "psr/http-client",
@@ -3604,8 +3602,11 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4 || ^8.0"
+        "php": "^7.4 || ^8.0 || ^8.1",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-zip": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.2.0"
 }

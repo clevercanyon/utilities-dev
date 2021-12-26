@@ -13,12 +13,20 @@
 	"minimum-stability" : "dev",
 	"config"            : {
 		"process-timeout"     : 0,
-		"optimize-autoloader" : true
+		"optimize-autoloader" : true,
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
 	},
 	"require"           : {
-		"php"                                   : "^7.4 || ^8.0",
+		"php"                                   : "^7.4 || ^8.0 || ^8.1",
+		"ext-json"                              : "*",
+		"ext-mbstring"                          : "*",
+		"ext-zip"                               : "*",
+
 		"aws/aws-sdk-php"                       : "^3.2",
 		"phpunit/phpunit"                       : "^9.5",
+
 		"clevercanyon/php-js-standards"         : "dev-main",
 		"clevercanyon/php-js-utilities"         : "dev-main",
 		"clevercanyon/php-js-utilities-dev-npm" : "dev-main"
@@ -38,7 +46,7 @@
 			"[ $COMPOSER_DEV_MODE -eq 0 ] || ./src/toolchain/composer/post-update-cmd.php"
 		],
 		"run-project-tests" : [
-			"XDEBUG_MODE=coverage ./vendor/bin/phpunit --configuration ./.phpunit.xml --testsuite tests"
+			"./vendor/bin/phpunit --configuration ./.phpunit.xml --testsuite tests"
 		]
 	},
 	"extra"             : {

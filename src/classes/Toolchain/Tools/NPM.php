@@ -1,4 +1,3 @@
-#!/usr/bin/env php
 <?php
 /**
  * CLEVER CANYON™ {@see https://clevercanyon.com}
@@ -17,7 +16,7 @@
  * @since 2021-12-25
  */
 declare( strict_types = 1 ); // ｡･:*:･ﾟ★.
-namespace Clever_Canyon\Utilities_Dev\Toolchain\Composer;
+namespace Clever_Canyon\Utilities_Dev\Toolchain\Tools;
 
 /**
  * Utilities.
@@ -33,30 +32,30 @@ use Clever_Canyon\Utilities\OOP\Version_1_0_0\{Exception};
  * @since 2021-12-15
  */
 use Clever_Canyon\Utilities_Dev\Toolchain\{Tools as T};
-use Clever_Canyon\Utilities_Dev\Toolchain\Composer\{Project};
-
-/**
- * File-specific.
- *
- * @since 2021-12-15
- */
-use Clever_Canyon\Utilities_Dev\Toolchain\Composer\Hooks\{Post_Update_Cmd_Handler};
 
 // </editor-fold>
 
 /**
- * Dev mode only.
+ * NPM utilities.
  *
  * @since 2021-12-15
  */
-if ( ! getenv( 'COMPOSER_DEV_MODE' ) ) {
-	exit( 'Dev mode only.' );
-}
+class NPM extends \Clever_Canyon\Utilities\OOPs\Version_1_0_0\Base {
+	/**
+	 * NPM package name max bytes.
+	 *
+	 * @since 2021-12-15
+	 *
+	 * @see   https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name
+	 */
+	public const PACKAGE_NAME_MAX_BYTES = 214;
 
-/**
- * Handles `post-update-cmd` hook.
- *
- * @since 2021-12-15
- */
-require_once getcwd() . '/vendor/autoload.php';
-new Post_Update_Cmd_Handler();
+	/**
+	 * NPM package name regexp.
+	 *
+	 * @since 2021-12-15
+	 *
+	 * @see   https://github.com/npm/validate-npm-package-name/blob/main/index.js
+	 */
+	public const PACKAGE_NAME_REGEXP = '/^(?:(@[a-z0-9](?:[_.-]?[a-z0-9]+)*)\/)?([a-z0-9](?:(?:[_.]?|-{0,2})[a-z0-9]+)*)$/u';
+}
