@@ -87,8 +87,6 @@ class Post_Update_Cmd_Handler extends \Clever_Canyon\Utilities\OOP\Version_1_0_0
 	 * Command: `update`.
 	 *
 	 * @since 2021-12-15
-	 *
-	 * @throws Exception On any failure.
 	 */
 	protected function update() : void {
 		try {

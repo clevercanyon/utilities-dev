@@ -53,7 +53,7 @@ class Composer extends \Clever_Canyon\Utilities\OOPs\Version_1_0_0\Base {
 	 *
 	 * @since 2021-12-15
 	 *
-	 * @see   Composer seemingly doesn't have or document a limit.
+	 * @note  Composer seemingly doesn't have or document a limit.
 	 *        We'll use the same limit as NPM does, which is 214 characters.
 	 */
 	public const PACKAGE_NAME_MAX_BYTES = 214;

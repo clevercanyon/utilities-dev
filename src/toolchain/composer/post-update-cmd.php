@@ -58,5 +58,5 @@ if ( ! getenv( 'COMPOSER_DEV_MODE' ) ) {
  *
  * @since 2021-12-15
  */
-require_once getcwd() . '/vendor/autoload.php';
+require_once dirname( __FILE__, 4 ) . '/vendor/autoload.php';
 new Post_Update_Cmd_Handler();
