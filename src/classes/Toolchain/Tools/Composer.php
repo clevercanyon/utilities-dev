@@ -151,7 +151,10 @@ class Composer extends \Clever_Canyon\Utilities\STC\Version_1_0_0\Abstracts\A6t_
 				$_package_file = U\Dir::join( $_package_dir, '/composer.json' );
 
 				if ( ! is_file( $_package_file ) ) { // Report the case of missing dependency.
-					throw new Exception( 'Missing `composer.json` file for `@extends-packages` entry: `' . $_package_name . '` in: `' . $file . '`.' );
+					throw new Exception(
+						'Missing `composer.json` file for `@extends-packages` entry: `' . $_package_name . '`' .
+						' in: `' . $file . '`. The missing location is: `' . $_package_file . '`.'
+					);
 				}
 				$_package_json = T\Composer::json( $_package_dir, $namespace, $_r );
 

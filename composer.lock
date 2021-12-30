@@ -325,12 +325,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/clevercanyon/php-js-utilities-dev-npm.git",
-                "reference": "847eeae98cd95a3dc4dce77108e0917d37ab72fb"
+                "reference": "592c17f382149c78ebd298850c4c075b99ce0f05"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/clevercanyon/php-js-utilities-dev-npm/zipball/847eeae98cd95a3dc4dce77108e0917d37ab72fb",
-                "reference": "847eeae98cd95a3dc4dce77108e0917d37ab72fb",
+                "url": "https://api.github.com/repos/clevercanyon/php-js-utilities-dev-npm/zipball/592c17f382149c78ebd298850c4c075b99ce0f05",
+                "reference": "592c17f382149c78ebd298850c4c075b99ce0f05",
                 "shasum": ""
             },
             "require": {
@@ -366,7 +366,7 @@
                 "issues": "https://github.com/clevercanyon/php-js-utilities-dev-npm/issues",
                 "source": "https://github.com/clevercanyon/php-js-utilities-dev-npm/tree/main"
             },
-            "time": "2021-12-26T18:47:12+00:00"
+            "time": "2021-12-30T23:35:08+00:00"
         },
         {
             "name": "dealerdirect/phpcodesniffer-composer-installer",
