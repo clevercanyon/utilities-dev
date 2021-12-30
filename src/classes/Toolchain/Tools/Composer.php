@@ -23,8 +23,10 @@ namespace Clever_Canyon\Utilities_Dev\Toolchain\Tools;
  *
  * @since 2021-12-15
  */
-use Clever_Canyon\Utilities\OOPs\{Version_1_0_0 as U};
-use Clever_Canyon\Utilities\OOP\Version_1_0_0\{Exception};
+use Clever_Canyon\Utilities\STC\{Version_1_0_0 as U};
+use Clever_Canyon\Utilities\OOP\Version_1_0_0\{Offsets, Generic, Error, Exception, Fatal_Exception};
+use Clever_Canyon\Utilities\OOP\Version_1_0_0\Abstracts\{A6t_Base, A6t_Offsets, A6t_Generic, A6t_Error, A6t_Exception};
+use Clever_Canyon\Utilities\OOP\Version_1_0_0\Interfaces\{I7e_Base, I7e_Offsets, I7e_Generic, I7e_Error, I7e_Exception};
 
 /**
  * Toolchain.
@@ -40,7 +42,7 @@ use Clever_Canyon\Utilities_Dev\Toolchain\{Tools as T};
  *
  * @since 2021-12-15
  */
-class Composer extends \Clever_Canyon\Utilities\OOPs\Version_1_0_0\Base {
+class Composer extends \Clever_Canyon\Utilities\STC\Version_1_0_0\Abstracts\A6t_Stc_Base {
 	/**
 	 * Packages directory regexp.
 	 *
@@ -72,18 +74,19 @@ class Composer extends \Clever_Canyon\Utilities\OOPs\Version_1_0_0\Base {
 	 *
 	 * @since 2021-12-15
 	 *
-	 * @param string         $dir       Directory path.
-	 * @param string|null    $namespace Namespace. Defaults to `null`.
-	 *                                  If set, we extract a specific top-level namespace property from the `extra` props section in a
-	 *                                  `composer.json` file. The `$namespace` is bumped up and becomes the only `extra` props.
-	 * @param \stdClass|null $_r        For internal recursive use only.
+	 * @param string      $dir        Directory path.
+	 * @param string|null $namespace  Namespace. Defaults to `null`.
+	 *                                If set, we extract a specific top-level namespace property from the `extra` props section in a
+	 *                                `composer.json` file. The `$namespace` is bumped up and becomes the only `extra` props.
+	 *
+	 * @param object|null $_r         For internal recursive use only.
 	 *
 	 * @throws Exception On any failure, except if file does not exist. That's ok ... unless the file is associated with an `@extends-packages`
 	 *                    directive, in which case an exception *will* be thrown, as that would be unexpected behavior and likely problematic.
 	 *
-	 * @return \stdClass Object with `composer.json` properties from the given `$dir` parameter.
+	 * @return object Object with `composer.json` properties from the given `$dir` parameter.
 	 */
-	public static function json( string $dir, /* string|null */ ?string $namespace = null, /* \stdClass|null */ ?\stdClass $_r = null ) : \stdClass {
+	public static function json( string $dir, /* string|null */ ?string $namespace = null, /* \stdClass|null */ ?object $_r = null ) : object {
 		// Setup variables.
 
 		$is_recursive = isset( $_r );
@@ -96,7 +99,7 @@ class Composer extends \Clever_Canyon\Utilities\OOPs\Version_1_0_0\Base {
 
 		if ( ! $is_recursive ) {
 			$cache_key = [ __FUNCTION__, $dir, $namespace ];
-			if ( null !== ( $cache = &static::oops_cache( $cache_key ) ) ) {
+			if ( null !== ( $cache = &static::stc_cache( $cache_key ) ) ) {
 				return $cache; // Cached already.
 			}
 		}
@@ -153,13 +156,13 @@ class Composer extends \Clever_Canyon\Utilities\OOPs\Version_1_0_0\Base {
 				$_package_json = T\Composer::json( $_package_dir, $namespace, $_r );
 
 				if ( is_object( $_package_json->extra ?? null ) && is_object( $_package_json->extra->{$namespace} ?? null ) ) {
-					$_extends_json_extra_namespace = U\Ctn::merge( $_extends_json_extra_namespace, $_package_json->extra->{$namespace} );
+					$_extends_json_extra_namespace = U\Ctn::super_merge( $_extends_json_extra_namespace, $_package_json->extra->{$namespace} );
 				}
 			}
 			// Merge into everything we're extending.
 
 			if ( $_extends_json_extra_namespace ) {
-				$json->extra->{$namespace} = U\Ctn::merge( $_extends_json_extra_namespace, $json->extra->{$namespace} );
+				$json->extra->{$namespace} = U\Ctn::super_merge( $_extends_json_extra_namespace, $json->extra->{$namespace} );
 			}
 			// Drop the `@extends-packages` directive now.
 
@@ -174,8 +177,8 @@ class Composer extends \Clever_Canyon\Utilities\OOPs\Version_1_0_0\Base {
 			];
 			$extra_env_vars = array_map( 'strval', $extra_env_vars );
 
+			$json->extra->{$namespace} = U\Ctn::super_merge( $json->extra->{$namespace} );
 			$json->extra->{$namespace} = U\Ctn::resolve_env_vars( $json->extra->{$namespace}, $extra_env_vars );
-			$json->extra->{$namespace} = U\Ctn::resolve_extends( $json->extra->{$namespace} );
 			$json->extra               = $json->extra->{$namespace};
 		}
 		// Return cache.

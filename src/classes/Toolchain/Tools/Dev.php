@@ -23,8 +23,10 @@ namespace Clever_Canyon\Utilities_Dev\Toolchain\Tools;
  *
  * @since 2021-12-15
  */
-use Clever_Canyon\Utilities\OOPs\{Version_1_0_0 as U};
-use Clever_Canyon\Utilities\OOP\Version_1_0_0\{Exception};
+use Clever_Canyon\Utilities\STC\{Version_1_0_0 as U};
+use Clever_Canyon\Utilities\OOP\Version_1_0_0\{Offsets, Generic, Error, Exception, Fatal_Exception};
+use Clever_Canyon\Utilities\OOP\Version_1_0_0\Abstracts\{A6t_Base, A6t_Offsets, A6t_Generic, A6t_Error, A6t_Exception};
+use Clever_Canyon\Utilities\OOP\Version_1_0_0\Interfaces\{I7e_Base, I7e_Offsets, I7e_Generic, I7e_Error, I7e_Exception};
 
 /**
  * Toolchain.
@@ -40,7 +42,7 @@ use Clever_Canyon\Utilities_Dev\Toolchain\{Tools as T};
  *
  * @since 2021-12-15
  */
-class Dev extends \Clever_Canyon\Utilities\OOPs\Version_1_0_0\Base {
+class Dev extends \Clever_Canyon\Utilities\STC\Version_1_0_0\Abstracts\A6t_Stc_Base {
 	/**
 	 * Parses `~/.dev.json`.
 	 *
@@ -59,7 +61,7 @@ class Dev extends \Clever_Canyon\Utilities\OOPs\Version_1_0_0\Base {
 		$dir  = U\Fs::normalize( $dir );
 		$file = U\Dir::join( $dir, '/.dev.json' );
 
-		if ( null !== ( $cache = &static::oops_cache( [ __FUNCTION__, $dir, $namespace ] ) ) ) {
+		if ( null !== ( $cache = &static::stc_cache( [ __FUNCTION__, $dir, $namespace ] ) ) ) {
 			return $cache; // Cached already.
 		}
 		if ( ! $dir || ! $file ) {
@@ -76,8 +78,8 @@ class Dev extends \Clever_Canyon\Utilities\OOPs\Version_1_0_0\Base {
 		}
 		if ( $namespace ) {
 			$json->{$namespace} = is_object( $json->{$namespace} ?? null ) ? $json->{$namespace} : (object) [];
+			$json->{$namespace} = U\Ctn::super_merge( $json->{$namespace} );
 			$json->{$namespace} = U\Ctn::resolve_env_vars( $json->{$namespace} );
-			$json->{$namespace} = U\Ctn::resolve_extends( $json->{$namespace} );
 			$json               = $json->{$namespace};
 		}
 		return $cache = $json;

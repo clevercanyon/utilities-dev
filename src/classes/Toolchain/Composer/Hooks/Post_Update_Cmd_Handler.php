@@ -32,8 +32,10 @@ namespace Clever_Canyon\Utilities_Dev\Toolchain\Composer\Hooks;
  *
  * @since 2021-12-15
  */
-use Clever_Canyon\Utilities\OOPs\{Version_1_0_0 as U};
-use Clever_Canyon\Utilities\OOP\Version_1_0_0\{Exception};
+use Clever_Canyon\Utilities\STC\{Version_1_0_0 as U};
+use Clever_Canyon\Utilities\OOP\Version_1_0_0\{Offsets, Generic, Error, Exception, Fatal_Exception};
+use Clever_Canyon\Utilities\OOP\Version_1_0_0\Abstracts\{A6t_Base, A6t_Offsets, A6t_Generic, A6t_Error, A6t_Exception};
+use Clever_Canyon\Utilities\OOP\Version_1_0_0\Interfaces\{I7e_Base, I7e_Offsets, I7e_Generic, I7e_Error, I7e_Exception};
 
 /**
  * Toolchain.
@@ -50,7 +52,7 @@ use Clever_Canyon\Utilities_Dev\Toolchain\Composer\{Project};
  *
  * @since 2021-12-15
  */
-class Post_Update_Cmd_Handler extends \Clever_Canyon\Utilities\OOP\Version_1_0_0\CLI_Tool_Base {
+class Post_Update_Cmd_Handler extends \Clever_Canyon\Utilities\OOP\Version_1_0_0\Abstracts\A6t_CLI_Tool {
 	/**
 	 * Project.
 	 *
@@ -75,10 +77,10 @@ class Post_Update_Cmd_Handler extends \Clever_Canyon\Utilities\OOP\Version_1_0_0
 	 */
 	public function __construct() {
 		parent::__construct( 'update' );
-
 		$this->add_commands( [ 'update' => [] ] );
 
 		if ( U\Env::var( 'COMPOSER_DEV_MODE' ) ) {
+			U\Env::config_debugging_mode();
 			$this->route_request();
 		}
 	}
