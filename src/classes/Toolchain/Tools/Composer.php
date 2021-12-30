@@ -95,6 +95,9 @@ class Composer extends \Clever_Canyon\Utilities\STC\Version_1_0_0\Abstracts\A6t_
 		$dir  = U\Fs::normalize( $dir );
 		$file = U\Dir::join( $dir, '/composer.json' );
 
+		if ( ! $is_recursive ) {
+			$_r->dir = $dir; // Top-level project dir.
+		}
 		// Check the cache.
 
 		if ( ! $is_recursive ) {
@@ -147,7 +150,7 @@ class Composer extends \Clever_Canyon\Utilities\STC\Version_1_0_0\Abstracts\A6t_
 						' and be <= `' . T\Composer::PACKAGE_NAME_MAX_BYTES . '` bytes in length.'
 					);
 				}
-				$_package_dir  = U\Dir::join( $dir, '/vendor/' . $_package_name );
+				$_package_dir  = U\Dir::join( $_r->dir, '/vendor/' . $_package_name );
 				$_package_file = U\Dir::join( $_package_dir, '/composer.json' );
 
 				if ( ! is_file( $_package_file ) ) { // Report the case of missing dependency.
