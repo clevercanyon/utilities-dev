@@ -158,6 +158,8 @@ class Post_Update_Cmd_Handler extends \Clever_Canyon\Utilities\OOP\Version_1_0_0
 	 * @throws Exception On any failure.
 	 */
 	protected function maybe_symlink_local_repos() : void {
+		U\CLI::notice( __FUNCTION__ );
+
 		$symlink_local_packages_prop = '&.post_update_cmd_handler.symlink_local_packages';
 		$symlink_local_packages      = U\Obj::get_prop( $this->project->json->extra, $symlink_local_packages_prop );
 
@@ -251,6 +253,8 @@ class Post_Update_Cmd_Handler extends \Clever_Canyon\Utilities\OOP\Version_1_0_0
 	 * @throws Exception On any failure.
 	 */
 	protected function maybe_setup_dotfiles() : void {
+		U\CLI::notice( __FUNCTION__ );
+
 		$dotfiles_dir  = U\Dir::name( __FILE__, 5, '/libraries/dotfiles' );
 		$dotfiles_file = U\Dir::join( $dotfiles_dir, '/.dotfiles.json' );
 
@@ -354,10 +358,10 @@ class Post_Update_Cmd_Handler extends \Clever_Canyon\Utilities\OOP\Version_1_0_0
 	 * Maybe run NPM updates.
 	 *
 	 * @since 2021-12-15
-	 *
-	 * @throws Exception On any failure.
 	 */
 	protected function maybe_run_npm_update() : void {
+		U\CLI::notice( __FUNCTION__ );
+
 		if ( $this->project->has_file( 'package.json' ) ) {
 			U\CLI::run( [ 'npm', 'update' ], $this->project->dir );
 		}
