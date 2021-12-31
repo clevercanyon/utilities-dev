@@ -268,12 +268,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/clevercanyon/php-js-utilities.git",
-                "reference": "bb7368b904c74688e6e7b5de71daf23e7d542d0d"
+                "reference": "534cdc04427d4e3f916998280ae7dfb7ddf63321"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/clevercanyon/php-js-utilities/zipball/bb7368b904c74688e6e7b5de71daf23e7d542d0d",
-                "reference": "bb7368b904c74688e6e7b5de71daf23e7d542d0d",
+                "url": "https://api.github.com/repos/clevercanyon/php-js-utilities/zipball/534cdc04427d4e3f916998280ae7dfb7ddf63321",
+                "reference": "534cdc04427d4e3f916998280ae7dfb7ddf63321",
                 "shasum": ""
             },
             "require": {
@@ -317,7 +317,7 @@
                 "issues": "https://github.com/clevercanyon/php-js-utilities/issues",
                 "source": "https://github.com/clevercanyon/php-js-utilities/tree/main"
             },
-            "time": "2021-12-31T11:11:04+00:00"
+            "time": "2021-12-31T11:12:17+00:00"
         },
         {
             "name": "clevercanyon/php-js-utilities-dev-npm",
@@ -325,12 +325,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/clevercanyon/php-js-utilities-dev-npm.git",
-                "reference": "592c17f382149c78ebd298850c4c075b99ce0f05"
+                "reference": "1e250f4b771fce81339cd4cf4bd4a642d3798edc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/clevercanyon/php-js-utilities-dev-npm/zipball/592c17f382149c78ebd298850c4c075b99ce0f05",
-                "reference": "592c17f382149c78ebd298850c4c075b99ce0f05",
+                "url": "https://api.github.com/repos/clevercanyon/php-js-utilities-dev-npm/zipball/1e250f4b771fce81339cd4cf4bd4a642d3798edc",
+                "reference": "1e250f4b771fce81339cd4cf4bd4a642d3798edc",
                 "shasum": ""
             },
             "require": {
@@ -366,7 +366,7 @@
                 "issues": "https://github.com/clevercanyon/php-js-utilities-dev-npm/issues",
                 "source": "https://github.com/clevercanyon/php-js-utilities-dev-npm/tree/main"
             },
-            "time": "2021-12-30T23:35:08+00:00"
+            "time": "2021-12-31T11:12:47+00:00"
         },
         {
             "name": "dealerdirect/phpcodesniffer-composer-installer",
