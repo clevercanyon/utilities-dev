@@ -99,10 +99,9 @@ class Post_Update_Cmd_Handler extends \Clever_Canyon\Utilities\OOP\Version_1_0_0
 			$this->maybe_symlink_local_repos();
 			$this->maybe_setup_dotfiles();
 			$this->maybe_run_npm_update();
-			U\CLI::exit_status( 0 );
 
 		} catch ( \Throwable $throwable ) {
-			U\CLI::error( $throwable->__toString() );
+			U\CLI::error( $throwable->getMessage() );
 			U\CLI::exit_status( 1 );
 		}
 	}
