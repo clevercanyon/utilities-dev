@@ -81,7 +81,20 @@ class Post_Update_Cmd_Handler extends \Clever_Canyon\Utilities\OOP\Version_1_0_0
 	public function __construct( /* string|array|null */ $args_to_parse = 'update' ) {
 		parent::__construct( $args_to_parse );
 		$this->add_commands( [
-			'update' => [
+			'symlink' => [
+				'callback'    => [ $this, 'symlink' ],
+				'synopsis'    => 'Updates project symlinks.',
+				'description' => 'Updates project symlinks. See ' . __CLASS__ . '::symlink()',
+				'options'     => [
+					'project-dir' => [
+						'optional'    => true,
+						'description' => 'Project directory path.',
+						'validator'   => fn( $value ) => is_dir( $value ),
+						'default'     => getcwd(),
+					],
+				],
+			],
+			'update'  => [
 				'callback'    => [ $this, 'update' ],
 				'synopsis'    => 'Updates project symlinks, dotfiles, and NPM packages.',
 				'description' => 'Updates project symlinks, dotfiles, and NPM packages. See ' . __CLASS__ . '::update()',
@@ -90,6 +103,7 @@ class Post_Update_Cmd_Handler extends \Clever_Canyon\Utilities\OOP\Version_1_0_0
 						'optional'    => true,
 						'description' => 'Project directory path.',
 						'validator'   => fn( $value ) => is_dir( $value ),
+						'default'     => getcwd(),
 					],
 				],
 			],
@@ -101,13 +115,30 @@ class Post_Update_Cmd_Handler extends \Clever_Canyon\Utilities\OOP\Version_1_0_0
 	}
 
 	/**
+	 * Command: `symlink`.
+	 *
+	 * @since 2021-12-15
+	 */
+	protected function symlink() : void {
+		try {
+			$this->project = new Project( $this->get_option( 'project-dir' ) );
+			$this->maybe_symlink_local_repos();
+
+		} catch ( \Throwable $throwable ) {
+			U\CLI::error( $throwable->getMessage() );
+			U\CLI::error( $throwable->getTraceAsString() );
+			U\CLI::exit_status( 1 );
+		}
+	}
+
+	/**
 	 * Command: `update`.
 	 *
 	 * @since 2021-12-15
 	 */
 	protected function update() : void {
 		try {
-			$this->project = new Project( getcwd() );
+			$this->project = new Project( $this->get_option( 'project-dir' ) );
 			$this->maybe_symlink_local_repos();
 			$this->maybe_setup_dotfiles();
 			$this->maybe_run_npm_update();
