@@ -81,12 +81,12 @@ class Composer extends \Clever_Canyon\Utilities\STC\Version_1_0_0\Abstracts\A6t_
 	 *
 	 * @param object|null $_r         For internal recursive use only.
 	 *
-	 * @throws Exception On any failure, except if file does not exist. That's ok ... unless the file is associated with an `@extends-packages`
+	 * @throws Exception On any failure, except if file does not exist. That's ok ... unless the file is associated with an `$extends-packages`
 	 *                    directive, in which case an exception *will* be thrown, as that would be unexpected behavior and likely problematic.
 	 *
 	 * @return object Object with `composer.json` properties from the given `$dir` parameter.
 	 */
-	public static function json( string $dir, /* string|null */ ?string $namespace = null, /* \stdClass|null */ ?object $_r = null ) : object {
+	public static function json( string $dir, /* string|null */ ?string $namespace = null, /* object|null */ ?object $_r = null ) : object {
 		// Setup variables.
 
 		$is_recursive = isset( $_r );
@@ -126,26 +126,26 @@ class Composer extends \Clever_Canyon\Utilities\STC\Version_1_0_0\Abstracts\A6t_
 		if ( $namespace && ! is_object( $json->extra->{$namespace} ?? null ) ) {
 			$json->extra->{$namespace} = (object) [];
 		}
-		// Maybe handles `@extends-packages` directive(s) recursively.
+		// Maybe handles `$extends-packages` directive(s) recursively.
 
-		if ( $namespace && property_exists( $json->extra->{$namespace}, '@extends-packages' ) ) {
-			// Validate `@extends-packages` directive.
+		if ( $namespace && property_exists( $json->extra->{$namespace}, '$extends-packages' ) ) {
+			// Validate `$extends-packages` directive.
 
-			if ( ! is_array( $json->extra->{$namespace}->{'@extends-packages'} ) ) {
-				throw new Exception( 'Unexpected `@extends-packages` directive in: `' . $file . '`. Must be array.' );
+			if ( ! is_array( $json->extra->{$namespace}->{'$extends-packages'} ) ) {
+				throw new Exception( 'Unexpected `$extends-packages` directive in: `' . $file . '`. Must be array.' );
 			}
 			// Compile packages that we need to extend, recursively.
 
 			$_extends_json_extra_namespace = (object) []; // Initialize.
 
-			foreach ( $json->extra->{$namespace}->{'@extends-packages'} as $_package_name ) {
+			foreach ( $json->extra->{$namespace}->{'$extends-packages'} as $_package_name ) {
 				if ( ! $_package_name
 					|| ! is_string( $_package_name )
 					|| ! preg_match( T\Composer::PACKAGE_NAME_REGEXP, $_package_name )
 					|| strlen( $_package_name ) > T\Composer::PACKAGE_NAME_MAX_BYTES
 				) {
 					throw new Exception(
-						'Unexpected `@extends-packages` entry: `' . $_package_name . '` in: `' . $file . '`.' .
+						'Unexpected `$extends-packages` entry: `' . $_package_name . '` in: `' . $file . '`.' .
 						' Must match pattern: `' . T\Composer::PACKAGE_NAME_REGEXP . '`' .
 						' and be <= `' . T\Composer::PACKAGE_NAME_MAX_BYTES . '` bytes in length.'
 					);
@@ -155,7 +155,7 @@ class Composer extends \Clever_Canyon\Utilities\STC\Version_1_0_0\Abstracts\A6t_
 
 				if ( ! is_file( $_package_file ) ) { // Report the case of missing dependency.
 					throw new Exception(
-						'Missing `composer.json` file for `@extends-packages` entry: `' . $_package_name . '`' .
+						'Missing `composer.json` file for `$extends-packages` entry: `' . $_package_name . '`' .
 						' in: `' . $file . '`. The missing location is: `' . $_package_file . '`.'
 					);
 				}
@@ -170,9 +170,9 @@ class Composer extends \Clever_Canyon\Utilities\STC\Version_1_0_0\Abstracts\A6t_
 			if ( $_extends_json_extra_namespace ) {
 				$json->extra->{$namespace} = U\Ctn::super_merge( $_extends_json_extra_namespace, $json->extra->{$namespace} );
 			}
-			// Drop the `@extends-packages` directive now.
+			// Drop the `$extends-packages` directive now.
 
-			unset( $json->extra->{$namespace}->{'@extends-packages'} );
+			unset( $json->extra->{$namespace}->{'$extends-packages'} );
 		}
 		// Maybe bump namespace up into extra props.
 

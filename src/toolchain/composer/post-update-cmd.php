@@ -60,5 +60,6 @@ if ( ! getenv( 'COMPOSER_DEV_MODE' ) ) {
  *
  * @since 2021-12-15
  */
-require_once getcwd() . '/vendor/autoload.php';
-new Post_Update_Cmd_Handler();
+${__FILE__}[ 'getcwd' ] = getcwd();
+require_once ${__FILE__}[ 'getcwd' ] . '/vendor/autoload.php';
+new Post_Update_Cmd_Handler( [ 'update', '--project-dir', ${__FILE__}[ 'getcwd' ] ] );

@@ -80,8 +80,20 @@ class Post_Update_Cmd_Handler extends \Clever_Canyon\Utilities\OOP\Version_1_0_0
 	 */
 	public function __construct( /* string|array|null */ $args_to_parse = 'update' ) {
 		parent::__construct( $args_to_parse );
-		$this->add_commands( [ 'update' => [] ] );
-
+		$this->add_commands( [
+			'update' => [
+				'callback'    => [ $this, 'update' ],
+				'synopsis'    => 'Updates project symlinks, dotfiles, and NPM packages.',
+				'description' => 'Updates project symlinks, dotfiles, and NPM packages. See ' . __CLASS__ . '::update()',
+				'options'     => [
+					'project-dir' => [
+						'optional'    => true,
+						'description' => 'Project directory path.',
+						'validator'   => fn( $value ) => is_dir( $value ),
+					],
+				],
+			],
+		] );
 		if ( U\Env::var( 'COMPOSER_DEV_MODE' ) ) {
 			U\Env::config_debugging_mode();
 			$this->route_request();
@@ -102,6 +114,7 @@ class Post_Update_Cmd_Handler extends \Clever_Canyon\Utilities\OOP\Version_1_0_0
 
 		} catch ( \Throwable $throwable ) {
 			U\CLI::error( $throwable->getMessage() );
+			U\CLI::error( $throwable->getTraceAsString() );
 			U\CLI::exit_status( 1 );
 		}
 	}
