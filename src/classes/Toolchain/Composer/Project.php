@@ -597,56 +597,76 @@ class Project extends \Clever_Canyon\Utilities\OOP\Version_1_0_0\Abstracts\A6t_B
 	}
 
 	/**
-	 * Gets distro prune configuration.
+	 * Gets comp directory copy configuration, applies to all projects.
 	 *
 	 * @since 2021-12-15
 	 *
-	 * @return array Prune configuration.
+	 * @return array Comp directory copy configuration.
 	 */
-	public function distro_prune_config() : array {
-		$config = [
-			'prune'            => [
-				// Any dot path.
-				'/(^|.+?\/)\./ui',
-
-				// Any of these project config paths.
-				'/(^|.+?\/)[^\/]+?\.(cjs|cts|xml|yml|yaml|json5?|neon|dist|lock)$/ui',
-				'/(^|.+?\/)(babel|gulpfile|gruntfile)(\.(esm))?\.(jsx?|tsx?)$/ui',
-				'/(^|.+?\/)[^\/]+?\.(cfg|config|babel)\.(jsx?|tsx?)$/ui',
-
-				// Any of these project source-only paths.
-				'/(^|.+?\/)[^\/]+?\.(jsx|tsx?)$/ui',
-
-				// Any of these project bin paths.
-				'/(^|.+?\/)(bin)$/ui',
-				'/(^|.+?\/)[^\/]+?\.(exe|bat|sh|bash|zsh)$/ui',
-
-				// Any of these arbitrary archive paths.
-				'/(^|.+?\/)[^\/]+?\.(iso|dmg|bz2|7z|zip|tar|tgz|gz|phar)$/ui',
-
-				// Any of these project test paths.
-				'/(^|.+?\/)(tests?|test[_\-]files?|phpunit([_\-]tests?)?)$/ui',
-
-				// Any of these project doc paths.
-				'/(^|.+?\/)(docs?|api[_\-]docs?|examples?|benchmarks?)$/ui',
-
-				// Any of these project build paths.
-				'/(^|.+?\/)(builds?|make(files?)?)$/ui',
-
-				// Any of these project dev paths.
-				'/(^|.+?\/)(dev|devops?)$/ui',
-
-				// Any of these project package paths.
-				'/(^|.+?\/)(node[_\-]modules|jspm[_\-]packages|bower[_\-]components)$/ui',
+	public function comp_dir_copy_config() : array {
+		return [
+			'ignore'     => [
+				U\Fs::gitignore_regexp( 'positive' ),
 			],
-			'prune_exceptions' => [
-				'/(^|.+?\/)vendor\/composer\/installed\.json$/ui',
+			'exceptions' => [],
+		];
+	}
+
+	/**
+	 * Gets distro directory prune configuration, applies to all projects.
+	 *
+	 * @since 2021-12-15
+	 *
+	 * @return array Distro directory prune configuration.
+	 */
+	public function distro_dir_prune_config() : array {
+		$config = [
+			'prune'      => [
+				// `.gitignore`, except `/vendor`.
+				U\Fs::gitignore_regexp( 'positive', '.*', [ 'vendor' => false ] ),
+
+				// All dotfiles.
+				'/(?:^|.+?\/)\./ui',
+
+				// All of these project config paths.
+				'/(?:^|.+?\/)[^\/]+?\.(?:cjs|cts|xml|yml|yaml|json5?|neon|dist|lock)$/ui',
+				'/(?:^|.+?\/)(?:babel|gulpfile|gruntfile)(?:\.(?:esm))?\.(?:jsx?|tsx?)$/ui',
+				'/(?:^|.+?\/)[^\/]+?\.(?:cfg|config|babel)\.(?:jsx?|tsx?)$/ui',
+
+				// All of these project source-only paths.
+				'/(?:^|.+?\/)[^\/]+?\.(?:jsx|tsx?)$/ui',
+
+				// All of these project bin paths.
+				'/(?:^|.+?\/)(?:bin)$/ui',
+				'/(?:^|.+?\/)[^\/]+?\.(?:exe|bat|sh|bash|zsh)$/ui',
+
+				// All of these arbitrary archive paths.
+				'/(?:^|.+?\/)[^\/]+?\.(?:iso|dmg|bz2|7z|zip|tar|tgz|gz|phar)$/ui',
+
+				// All of these project test paths.
+				'/(?:^|.+?\/)(?:tests?|test[_\-]files?|phpunit([_\-]tests?)?)$/ui',
+
+				// All of these project doc paths.
+				'/(?:^|.+?\/)(?:docs?|api[_\-]docs?|examples?|benchmarks?)$/ui',
+
+				// All of these project build paths.
+				'/(?:^|.+?\/)(?:builds?|make(files?)?)$/ui',
+
+				// All of these project dev paths.
+				'/(?:^|.+?\/)(?:dev|devops?)$/ui',
+
+				// All of these project package paths.
+				'/(?:^|.+?\/)(?:node[_\-]modules|jspm[_\-]packages|bower[_\-]components)$/ui',
+			],
+			'exceptions' => [
+				'/(?:^|.+?\/)\.htaccess$/ui',
 			],
 		];
 		if ( $this->is_wp_project() ) {
 			$config[ 'prune' ] = array_merge( $config[ 'prune' ], [
-				'/^(vendor)$/ui',
-				'/^(readme)\.(md|txt|rtf)$/ui',
+				// Also all of these in root directory.
+				'/^(?:vendor)$/ui',
+				'/^(?:readme)\.(?:md|txt|rtf)$/ui',
 			] );
 		}
 		return $config;
