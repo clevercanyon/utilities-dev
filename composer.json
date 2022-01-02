@@ -13,7 +13,8 @@
 	"minimum-stability" : "dev",
 	"config"            : {
 		"allow-plugins" : {
-			"dealerdirect/phpcodesniffer-composer-installer" : true
+			"dealerdirect/phpcodesniffer-composer-installer": true,
+			"composer/package-versions-deprecated": true
 		}
 	},
 	"require"           : {
@@ -24,6 +25,7 @@
 
 		"aws/aws-sdk-php"                       : "^3.2",
 		"phpunit/phpunit"                       : "^9.5",
+		"humbug/php-scoper"                     : "^0.15",
 
 		"clevercanyon/php-js-standards"         : "dev-main",
 		"clevercanyon/php-js-utilities"         : "dev-main",

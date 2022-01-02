@@ -23,10 +23,10 @@ namespace Clever_Canyon\Utilities_Dev\Toolchain\Composer;
  *
  * @since 2021-12-15
  */
-use Clever_Canyon\Utilities\STC\{Version_1_0_0 as U};
-use Clever_Canyon\Utilities\OOP\Version_1_0_0\{Offsets, Generic, Error, Exception, Fatal_Exception};
-use Clever_Canyon\Utilities\OOP\Version_1_0_0\Abstracts\{A6t_Base, A6t_Offsets, A6t_Generic, A6t_Error, A6t_Exception};
-use Clever_Canyon\Utilities\OOP\Version_1_0_0\Interfaces\{I7e_Base, I7e_Offsets, I7e_Generic, I7e_Error, I7e_Exception};
+use Clever_Canyon\Utilities\{STC as U};
+use Clever_Canyon\Utilities\OOP\{Offsets, Generic, Error, Exception, Fatal_Exception};
+use Clever_Canyon\Utilities\OOP\Abstracts\{A6t_Base, A6t_Offsets, A6t_Generic, A6t_Error, A6t_Exception};
+use Clever_Canyon\Utilities\OOP\Interfaces\{I7e_Base, I7e_Offsets, I7e_Generic, I7e_Error, I7e_Exception};
 
 /**
  * Toolchain.
@@ -52,13 +52,13 @@ use Clever_Canyon\Utilities_Dev\Toolchain\{Tools as T};
  * @property-read $brand_slug
  * @property-read $brand_var
  */
-class Project extends \Clever_Canyon\Utilities\OOP\Version_1_0_0\Abstracts\A6t_Base {
+class Project extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t_Base {
 	/**
 	 * OOP traits.
 	 *
 	 * @since 2021-12-15
 	 */
-	use \Clever_Canyon\Utilities\OOP\Version_1_0_0\Traits\I7e_Base\Magic\Readable_Members;
+	use \Clever_Canyon\Utilities\OOP\Traits\I7e_Base\Magic\Readable_Members;
 
 	/**
 	 * Directory.
@@ -232,7 +232,7 @@ class Project extends \Clever_Canyon\Utilities\OOP\Version_1_0_0\Abstracts\A6t_B
 	 * @throws Exception On any failure.
 	 * @return \stdClass|false Plugin data.
 	 *
-	 * @see                   \WP_Groove\Framework\Plugin\Version_1_0_0\Abstracts\AA6t_Plugin::__construct()
+	 * @see                   \WP_Groove\Framework\Plugin\Abstracts\AA6t_Plugin::__construct()
 	 */
 	public function wp_plugin_data() /* : \stdClass|false */ {
 		if ( null !== ( $cache = &$this->oop_cache( __FUNCTION__ ) ) ) {
@@ -355,7 +355,7 @@ class Project extends \Clever_Canyon\Utilities\OOP\Version_1_0_0\Abstracts\A6t_B
 	 * @throws Exception On any failure.
 	 * @return \stdClass|false Theme data.
 	 *
-	 * @see                   \WP_Groove\Framework\Theme\Version_1_0_0\Abstracts\AA6t_Theme::__construct()
+	 * @see                   \WP_Groove\Framework\Theme\Abstracts\AA6t_Theme::__construct()
 	 */
 	public function wp_theme_data() /* : \stdClass|false */ {
 		if ( null !== ( $cache = &$this->oop_cache( __FUNCTION__ ) ) ) {

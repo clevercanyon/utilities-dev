@@ -23,10 +23,10 @@ namespace Clever_Canyon\Utilities_Dev\Toolchain\Tools;
  *
  * @since 2021-12-15
  */
-use Clever_Canyon\Utilities\STC\{Version_1_0_0 as U};
-use Clever_Canyon\Utilities\OOP\Version_1_0_0\{Offsets, Generic, Error, Exception, Fatal_Exception};
-use Clever_Canyon\Utilities\OOP\Version_1_0_0\Abstracts\{A6t_Base, A6t_Offsets, A6t_Generic, A6t_Error, A6t_Exception};
-use Clever_Canyon\Utilities\OOP\Version_1_0_0\Interfaces\{I7e_Base, I7e_Offsets, I7e_Generic, I7e_Error, I7e_Exception};
+use Clever_Canyon\Utilities\{STC as U};
+use Clever_Canyon\Utilities\OOP\{Offsets, Generic, Error, Exception, Fatal_Exception};
+use Clever_Canyon\Utilities\OOP\Abstracts\{A6t_Base, A6t_Offsets, A6t_Generic, A6t_Error, A6t_Exception};
+use Clever_Canyon\Utilities\OOP\Interfaces\{I7e_Base, I7e_Offsets, I7e_Generic, I7e_Error, I7e_Exception};
 
 /**
  * Toolchain.
@@ -42,7 +42,7 @@ use Clever_Canyon\Utilities_Dev\Toolchain\{Tools as T};
  *
  * @since 2021-12-15
  */
-class Composer extends \Clever_Canyon\Utilities\STC\Version_1_0_0\Abstracts\A6t_Stc_Base {
+class Composer extends \Clever_Canyon\Utilities\STC\Abstracts\A6t_Stc_Base {
 	/**
 	 * Packages directory regexp.
 	 *
