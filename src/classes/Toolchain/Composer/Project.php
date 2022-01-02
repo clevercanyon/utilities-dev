@@ -49,6 +49,8 @@ use Clever_Canyon\Utilities_Dev\Toolchain\{Tools as T};
  * @property-read $dev_json
  *
  * @property-read $name
+ * @property-read $name_hash
+ *
  * @property-read $brand_slug
  * @property-read $brand_var
  */
@@ -94,6 +96,13 @@ class Project extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t_Base {
 	 * @since 2021-12-15
 	 */
 	protected string $name;
+
+	/**
+	 * Name hash.
+	 *
+	 * @since 2021-12-15
+	 */
+	protected string $name_hash;
 
 	/**
 	 * Brand slug.
@@ -142,7 +151,8 @@ class Project extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t_Base {
 		}
 		// Validate name property.
 
-		$this->name = strval( $this->json->name );
+		$this->name      = strval( $this->json->name );
+		$this->name_hash = 'X' . mb_strtoupper( mb_substr( md5( mb_strtolower( $this->name ) ), 0, 15 ) );
 
 		if ( ! $this->name || ! preg_match( T\Composer::PACKAGE_NAME_REGEXP, $this->name ) ) {
 			throw new Exception( 'Missing or invalid characters in `Project->name`. Must match: `' . T\Composer::PACKAGE_NAME_REGEXP . '`.' );

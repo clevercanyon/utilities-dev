@@ -25,7 +25,7 @@
 
 		"aws/aws-sdk-php"                       : "^3.2",
 		"phpunit/phpunit"                       : "^9.5",
-		"humbug/php-scoper"                     : "^0.15",
+		"humbug/php-scoper"                     : "dev-master",
 
 		"clevercanyon/php-js-standards"         : "dev-main",
 		"clevercanyon/php-js-utilities"         : "dev-main",
