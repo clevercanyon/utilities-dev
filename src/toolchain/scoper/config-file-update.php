@@ -67,11 +67,7 @@ ${__FILE__}[ 'cwd' ] = getcwd();
  *
  * @since 2021-12-15
  */
-if ( is_file( ${__FILE__}[ 'cwd' ] . '/vendor/scoper-autoload.php' ) ) {
-	require_once ${__FILE__}[ 'cwd' ] . '/vendor/scoper-autoload.php';
-} else {
-	require_once ${__FILE__}[ 'cwd' ] . '/vendor/autoload.php';
-}
+require_once ${__FILE__}[ 'cwd' ] . '/vendor/autoload.php';
 
 /**
  * Enables debugging mode.
