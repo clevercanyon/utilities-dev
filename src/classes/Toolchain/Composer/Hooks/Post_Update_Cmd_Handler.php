@@ -80,6 +80,7 @@ class Post_Update_Cmd_Handler extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t
 	 */
 	public function __construct( /* string|array|null */ $args_to_parse = 'update' ) {
 		parent::__construct( $args_to_parse );
+
 		$this->add_commands( [
 			'symlink' => [
 				'callback'    => [ $this, 'symlink' ],
@@ -96,8 +97,8 @@ class Post_Update_Cmd_Handler extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t
 			],
 			'update'  => [
 				'callback'    => [ $this, 'update' ],
-				'synopsis'    => 'Updates project symlinks, dotfiles, and NPM packages.',
-				'description' => 'Updates project symlinks, dotfiles, and NPM packages. See ' . __CLASS__ . '::update()',
+				'synopsis'    => 'Updates project dotfiles and NPM packages.',
+				'description' => 'Updates project dotfiles and NPM packages. See ' . __CLASS__ . '::update()',
 				'options'     => [
 					'project-dir' => [
 						'optional'    => true,
@@ -108,10 +109,7 @@ class Post_Update_Cmd_Handler extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t
 				],
 			],
 		] );
-		if ( U\Env::var( 'COMPOSER_DEV_MODE' ) ) {
-			U\Env::config_debugging_mode();
-			$this->route_request();
-		}
+		$this->route_request();
 	}
 
 	/**
@@ -121,7 +119,9 @@ class Post_Update_Cmd_Handler extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t
 	 */
 	protected function symlink() : void {
 		try {
-			$this->project = new Project( $this->get_option( 'project-dir' ) );
+			$this->project = new Project(
+				$this->get_option( 'project-dir' )
+			);
 			$this->maybe_symlink_local_repos();
 
 		} catch ( \Throwable $throwable ) {
@@ -138,7 +138,9 @@ class Post_Update_Cmd_Handler extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t
 	 */
 	protected function update() : void {
 		try {
-			$this->project = new Project( $this->get_option( 'project-dir' ) );
+			$this->project = new Project(
+				$this->get_option( 'project-dir' )
+			);
 			$this->maybe_setup_dotfiles();
 			$this->maybe_run_npm_update();
 
@@ -157,8 +159,6 @@ class Post_Update_Cmd_Handler extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t
 	 * @throws Exception On any failure.
 	 */
 	protected function maybe_symlink_local_repos() : void {
-		U\CLI::log( ': ' . __FUNCTION__ . '()' );
-
 		$symlink_local_packages_prop = '&.post_update_cmd_handler.symlink_local_packages';
 		$symlink_local_packages      = U\Obj::get_prop( $this->project->json->extra, $symlink_local_packages_prop );
 
@@ -252,8 +252,6 @@ class Post_Update_Cmd_Handler extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t
 	 * @throws Exception On any failure.
 	 */
 	protected function maybe_setup_dotfiles() : void {
-		U\CLI::log( ': ' . __FUNCTION__ . '()' );
-
 		$dotfiles_dir  = U\Dir::name( __FILE__, 5, '/libraries/dotfiles' );
 		$dotfiles_file = U\Dir::join( $dotfiles_dir, '/.dotfiles.json' );
 
@@ -359,8 +357,6 @@ class Post_Update_Cmd_Handler extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t
 	 * @since 2021-12-15
 	 */
 	protected function maybe_run_npm_update() : void {
-		U\CLI::log( ': ' . __FUNCTION__ . '()' );
-
 		if ( $this->project->has_file( 'package.json' ) ) {
 			U\CLI::run( [ 'npm', 'update' ], $this->project->dir );
 		}

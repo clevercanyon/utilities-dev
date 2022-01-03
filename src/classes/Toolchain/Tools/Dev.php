@@ -53,7 +53,7 @@ class Dev extends \Clever_Canyon\Utilities\STC\Abstracts\A6t_Stc_Base {
 	 *                               If set, we extract a specific top-level namespace property from the `.dev.json` file.
 	 *                               The `$namespace` is bumped up and becomes the entirety of the return object.
 	 *
-	 * @throws Exception On any failure, except if file does not exist, that's ok.
+	 * @throws Fatal_Exception On any failure, except if file does not exist, that's ok.
 	 * @return \stdClass Object with `.dev.json` properties from the given `$dir` parameter.
 	 */
 	public static function json( /* string|null */ ?string $dir = null, /* string|null */ ?string $namespace = null ) : \stdClass {
@@ -65,16 +65,16 @@ class Dev extends \Clever_Canyon\Utilities\STC\Abstracts\A6t_Stc_Base {
 			return $cache; // Cached already.
 		}
 		if ( ! $dir || ! $file ) {
-			throw new Exception( 'Missing dir: `' . $dir . '` or file: `' . $file . '`.' );
+			throw new Fatal_Exception( 'Missing dir: `' . $dir . '` or file: `' . $file . '`.' );
 		}
 		if ( ! is_file( $file ) ) {      // Special case, we allow this to slide.
 			return $cache = (object) []; // Not possible. Consistent with {@see composer_json()}.
 		}
 		if ( ! is_readable( $file ) ) {
-			throw new Exception( 'Unable to read file: `' . $file . '`.' );
+			throw new Fatal_Exception( 'Unable to read file: `' . $file . '`.' );
 		}
 		if ( ! is_object( $json = U\Str::json_decode( file_get_contents( $file ) ) ) ) {
-			throw new Exception( 'Unable to decode file: `' . $file . '`.' );
+			throw new Fatal_Exception( 'Unable to decode file: `' . $file . '`.' );
 		}
 		if ( $namespace ) {
 			$json->{$namespace} = is_object( $json->{$namespace} ?? null ) ? $json->{$namespace} : (object) [];

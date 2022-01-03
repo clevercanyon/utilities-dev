@@ -17,7 +17,7 @@
  * @since 2021-12-25
  */
 declare( strict_types = 1 ); // ｡･:*:･ﾟ★.
-namespace Clever_Canyon\Utilities_Dev\Toolchain\Composer;
+namespace Clever_Canyon\Utilities_Dev\Toolchain\Scoper;
 
 /**
  * Utilities.
@@ -42,7 +42,7 @@ use Clever_Canyon\Utilities_Dev\Toolchain\Composer\{Project};
  *
  * @since 2021-12-15
  */
-use Clever_Canyon\Utilities_Dev\Toolchain\Composer\Hooks\{Post_Update_Cmd_Handler};
+use Clever_Canyon\Utilities_Dev\Toolchain\Scoper\{Config_File};
 
 // </editor-fold>
 
@@ -53,15 +53,6 @@ use Clever_Canyon\Utilities_Dev\Toolchain\Composer\Hooks\{Post_Update_Cmd_Handle
  */
 if ( 'cli' !== PHP_SAPI ) {
 	exit( 'CLI mode only.' );
-}
-
-/**
- * Dev mode only.
- *
- * @since 2021-12-15
- */
-if ( ! getenv( 'COMPOSER_DEV_MODE' ) ) {
-	exit( 'Dev mode only.' );
 }
 
 /**
@@ -90,16 +81,11 @@ if ( is_file( ${__FILE__}[ 'cwd' ] . '/vendor/scoper-autoload.php' ) ) {
 U\Env::config_debugging_mode();
 
 /**
- * Handles `post-update-cmd` hook.
+ * Updates scoper config file.
  *
  * @since 2021-12-15
  */
-if ( 'update' === ( $argv[ 1 ] ?? '' ) ) {
-	new Post_Update_Cmd_Handler( [ 'update', '--project-dir', ${__FILE__}[ 'cwd' ] ] );
-} else {
-	new Post_Update_Cmd_Handler( [ 'symlink', '--project-dir', ${__FILE__}[ 'cwd' ] ] );
-	U\CLI::run( [ $argv[ 0 ], 'update' ] ); // Separate process, after symlinks.
-}
+new Config_File( [ 'update' ] );
 
 /**
  * Unsets `${__FILE__}`.

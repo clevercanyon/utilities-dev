@@ -13,18 +13,22 @@
 	"minimum-stability" : "dev",
 	"config"            : {
 		"allow-plugins" : {
-			"dealerdirect/phpcodesniffer-composer-installer": true,
-			"composer/package-versions-deprecated": true
+			"dealerdirect/phpcodesniffer-composer-installer" : true,
+			"composer/package-versions-deprecated"           : true
 		}
 	},
 	"require"           : {
-		"php"                                   : "^7.4 || ^8.0 || ^8.1",
+		"php"                                   : "^8.0 || ^8.1",
 		"ext-json"                              : "*",
 		"ext-mbstring"                          : "*",
 		"ext-zip"                               : "*",
 
 		"aws/aws-sdk-php"                       : "^3.2",
 		"phpunit/phpunit"                       : "^9.5",
+		"nikic/php-parser"                      : "^4.13",
+
+		"php-stubs/wordpress-globals"           : "dev-master",
+		"php-stubs/woocommerce-stubs"           : "dev-master",
 		"humbug/php-scoper"                     : "dev-master",
 
 		"clevercanyon/php-js-standards"         : "dev-main",
@@ -42,11 +46,14 @@
 		}
 	},
 	"scripts"           : {
-		"post-update-cmd"   : [
+		"post-update-cmd"           : [
 			"[ $COMPOSER_DEV_MODE -eq 0 ] || ./src/toolchain/composer/post-update-cmd.php"
 		],
-		"run-project-tests" : [
+		"run-project-tests"         : [
 			"./vendor/bin/phpunit --configuration ./.phpunit.xml --testsuite tests"
+		],
+		"scoper-config-file-update" : [
+			"./src/toolchain/scoper/config-file-update.php"
 		]
 	},
 	"extra"             : {

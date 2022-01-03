@@ -125,7 +125,7 @@ class Project extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t_Base {
 	 *
 	 * @param string $dir Directory.
 	 *
-	 * @throws Exception On any failure.
+	 * @throws Fatal_Exception On any failure.
 	 */
 	public function __construct( string $dir ) {
 		parent::__construct();
@@ -136,10 +136,10 @@ class Project extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t_Base {
 		$this->file = U\Dir::join( $this->dir, '/composer.json' );
 
 		if ( ! $this->dir ) {
-			throw new Exception( 'Missing `Project->dir`.' );
+			throw new Fatal_Exception( 'Missing `Project->dir`.' );
 		}
 		if ( ! is_file( $this->file ) ) {
-			throw new Exception( 'Missing `Project->file`.' );
+			throw new Fatal_Exception( 'Missing `Project->file`.' );
 		}
 		// Validate JSON data.
 
@@ -147,7 +147,7 @@ class Project extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t_Base {
 		$this->json     = T\Composer::json( $this->dir, 'clevercanyon' );
 
 		if ( ! isset( $this->json->name, $this->json->extra ) ) {
-			throw new Exception( 'Missing or extremely incomplete `Project->json` file.' );
+			throw new Fatal_Exception( 'Missing or extremely incomplete `Project->json` file.' );
 		}
 		// Validate name property.
 
@@ -155,7 +155,7 @@ class Project extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t_Base {
 		$this->name_hash = 'X' . mb_strtoupper( mb_substr( md5( mb_strtolower( $this->name ) ), 0, 15 ) );
 
 		if ( ! $this->name || ! preg_match( T\Composer::PACKAGE_NAME_REGEXP, $this->name ) ) {
-			throw new Exception( 'Missing or invalid characters in `Project->name`. Must match: `' . T\Composer::PACKAGE_NAME_REGEXP . '`.' );
+			throw new Fatal_Exception( 'Missing or invalid characters in `Project->name`. Must match: `' . T\Composer::PACKAGE_NAME_REGEXP . '`.' );
 		}
 		// Validate brand properties.
 
@@ -163,15 +163,15 @@ class Project extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t_Base {
 		$this->brand_var  = str_replace( '-', '_', $this->brand_slug );
 
 		if ( ! $this->brand_slug || ! $this->brand_var ) {
-			throw new Exception( 'Missing `Project->brand_slug|brand_var`.' );
+			throw new Fatal_Exception( 'Missing `Project->brand_slug|brand_var`.' );
 		}
 		// Validate WordPress plugin/theme data.
 
 		if ( $this->is_wp_plugin() && ! $this->wp_plugin_data() ) {
-			throw new Exception( 'Missing or incomplete `Project->wp_plugin_data()`.' );
+			throw new Fatal_Exception( 'Missing or incomplete `Project->wp_plugin_data()`.' );
 
 		} elseif ( $this->is_wp_theme() && ! $this->wp_theme_data() ) {
-			throw new Exception( 'Missing or incomplete `Project->wp_theme_data()`.' );
+			throw new Fatal_Exception( 'Missing or incomplete `Project->wp_theme_data()`.' );
 		}
 	}
 
@@ -239,7 +239,7 @@ class Project extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t_Base {
 	 *
 	 * @since                 1.0.0
 	 *
-	 * @throws Exception On any failure.
+	 * @throws Fatal_Exception On any failure.
 	 * @return \stdClass|false Plugin data.
 	 *
 	 * @see                   \WP_Groove\Framework\Plugin\Abstracts\AA6t_Plugin::__construct()
@@ -266,13 +266,13 @@ class Project extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t_Base {
 			|| ! is_file( $data->readme_file )
 			|| ! is_readable( $data->readme_file )
 		) {
-			throw new Exception(
+			throw new Fatal_Exception(
 				'Missing or unreadable file in `' . $data->dir . '`.' .
 				' Must have `plugin.php` and `readme.txt`.'
 			);
 		}
 		if ( count( $_p = explode( '/', $data->file ) ) < 3 ) {
-			throw new Exception( 'Unexpected plugin file path: `' . $data->file . '`.' );
+			throw new Fatal_Exception( 'Unexpected plugin file path: `' . $data->file . '`.' );
 		}
 		$data->basename = $_p[ count( $_p ) - 3 ] . '/' . $_p[ count( $_p ) - 2 ];
 
@@ -295,7 +295,7 @@ class Project extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t_Base {
 	 *
 	 * @since                 1.0.0
 	 *
-	 * @throws Exception On any failure.
+	 * @throws Fatal_Exception On any failure.
 	 * @return \stdClass|null Plugin file headers.
 	 *
 	 * @see                   https://developer.wordpress.org/reference/functions/get_plugin_data/
@@ -351,7 +351,7 @@ class Project extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t_Base {
 				$data->{$_prop} = '';
 			}
 			if ( ! $data->{$_prop} && ! in_array( $_prop, [ 'network', 'update_url' ], true ) ) {
-				throw new Exception( 'Missing `' . $_header . '` in plugin file headers.' );
+				throw new Fatal_Exception( 'Missing `' . $_header . '` in plugin file headers.' );
 			}
 		}
 		return $data;
@@ -362,7 +362,7 @@ class Project extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t_Base {
 	 *
 	 * @since                 1.0.0
 	 *
-	 * @throws Exception On any failure.
+	 * @throws Fatal_Exception On any failure.
 	 * @return \stdClass|false Theme data.
 	 *
 	 * @see                   \WP_Groove\Framework\Theme\Abstracts\AA6t_Theme::__construct()
@@ -397,13 +397,13 @@ class Project extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t_Base {
 			|| ! is_file( $data->readme_file )
 			|| ! is_readable( $data->readme_file )
 		) {
-			throw new Exception(
+			throw new Fatal_Exception(
 				'Missing or unreadable file in `' . $data->dir . '`.' .
 				' Must have `theme.php`, `functions.php`, `style.css`, and `readme.txt`.'
 			);
 		}
 		if ( count( $_p = explode( '/', $data->file ) ) < 3 ) {
-			throw new Exception( 'Unexpected theme file path: `' . $data->file . '`.' );
+			throw new Fatal_Exception( 'Unexpected theme file path: `' . $data->file . '`.' );
 		}
 		$data->basename = $_p[ count( $_p ) - 3 ] . '/' . $_p[ count( $_p ) - 2 ];
 
@@ -426,7 +426,7 @@ class Project extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t_Base {
 	 *
 	 * @since                 1.0.0
 	 *
-	 * @throws Exception On any failure.
+	 * @throws Fatal_Exception On any failure.
 	 * @return \stdClass|null Theme file headers.
 	 *
 	 * @see                   https://developer.wordpress.org/reference/classes/wp_theme/
@@ -485,7 +485,7 @@ class Project extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t_Base {
 				$data->{$_prop} = '';
 			}
 			if ( ! $data->{$_prop} && ! in_array( $_prop, [ 'template', 'status', 'update_url' ], true ) ) {
-				throw new Exception( 'Missing `' . $_header . '` in theme file headers.' );
+				throw new Fatal_Exception( 'Missing `' . $_header . '` in theme file headers.' );
 			}
 		}
 		return $data;
@@ -496,14 +496,14 @@ class Project extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t_Base {
 	 *
 	 * @since 2021-12-15
 	 *
-	 * @throws Exception On any failure.
+	 * @throws Fatal_Exception On any failure.
 	 * @return string AWS S3 bucket name.
 	 */
 	public function s3_bucket() : string {
 		$bucket_prop = '&.brand.aws.s3.bucket';
 
 		if ( ! $bucket = strval( U\Obj::get_prop( $this->json->extra, $bucket_prop ) ) ) {
-			throw new Exception( 'Missing extra prop: `' . $bucket_prop . '` in: `' . $this->file . '`.' );
+			throw new Fatal_Exception( 'Missing extra prop: `' . $bucket_prop . '` in: `' . $this->file . '`.' );
 		}
 		return $bucket;
 	}
@@ -513,7 +513,7 @@ class Project extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t_Base {
 	 *
 	 * @since 2021-12-15
 	 *
-	 * @throws Exception On any failure.
+	 * @throws Fatal_Exception On any failure.
 	 * @return array Bucket config suitable for {@see \Aws\S3\S3Client}.
 	 */
 	public function s3_bucket_config() : array {
@@ -524,7 +524,7 @@ class Project extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t_Base {
 		$secret_key      = U\Obj::get_prop( $this->dev_json, $secret_key_prop );
 
 		if ( ! $access_key || ! $secret_key ) {
-			throw new Exception(
+			throw new Fatal_Exception(
 				'Missing prop: `' . $access_key_prop . '` and/or `' . $secret_key_prop . '` in: `~/.dev.json`.' .
 				' Please contact support for help with AWS access. ' .
 				' We’ll also help you set up `~/.dev.json`.'
@@ -546,7 +546,7 @@ class Project extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t_Base {
 	 *
 	 * @param string $string String to hash.
 	 *
-	 * @throws Exception On any failure.
+	 * @throws Fatal_Exception On any failure.
 	 * @return string HMAC SHA256 keyed hash. 64 bytes in length.
 	 */
 	public function s3_hash_hmac_sha256( string $string ) : string {
@@ -554,7 +554,7 @@ class Project extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t_Base {
 		$hash_hmac_key      = U\Obj::get_prop( $this->dev_json, $hash_hmac_key_prop );
 
 		if ( ! $hash_hmac_key ) {
-			throw new Exception( 'Missing prop: `' . $hash_hmac_key_prop . '` in: `~/.dev.json`.' );
+			throw new Fatal_Exception( 'Missing prop: `' . $hash_hmac_key_prop . '` in: `~/.dev.json`.' );
 		}
 		return hash_hmac( 'sha256', $string, $hash_hmac_key );
 	}
@@ -583,7 +583,7 @@ class Project extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t_Base {
 	 *
 	 * @since 2021-12-15
 	 *
-	 * @throws Exception When it fails in unexpected ways; e.g., unreadable file.
+	 * @throws Fatal_Exception When it fails in unexpected ways; e.g., unreadable file.
 	 * @return string Local WordPress version, else empty string if not available in `.dev.json`.
 	 */
 	public function local_wp_version() : string {
@@ -594,13 +594,13 @@ class Project extends \Clever_Canyon\Utilities\OOP\Abstracts\A6t_Base {
 			return ''; // Let this pass, as it's not vital to our needs right now.
 		}
 		if ( ! is_readable( $___version_file ) ) {
-			throw new Exception( 'Missing or unreadable local WP core file: `' . $___version_file . '`.' );
+			throw new Fatal_Exception( 'Missing or unreadable local WP core file: `' . $___version_file . '`.' );
 		}
 		return ( function () use ( $___version_file ) : string {
 			include $___version_file;
 
 			if ( empty( $wp_version ) || ! is_string( $wp_version ) ) {
-				throw new Exception( 'Missing or unexpected local `$wp_version` in: `' . $___version_file . '`.' );
+				throw new Fatal_Exception( 'Missing or unexpected local `$wp_version` in: `' . $___version_file . '`.' );
 			}
 			return $wp_version;
 		} )();

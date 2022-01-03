@@ -81,8 +81,8 @@ class Composer extends \Clever_Canyon\Utilities\STC\Abstracts\A6t_Stc_Base {
 	 *
 	 * @param object|null $_r         For internal recursive use only.
 	 *
-	 * @throws Exception On any failure, except if file does not exist. That's ok ... unless the file is associated with an `$extends-packages`
-	 *                    directive, in which case an exception *will* be thrown, as that would be unexpected behavior and likely problematic.
+	 * @throws Fatal_Exception On any failure, except if file does not exist. That's ok ... unless the file is associated with an `$extends-packages`
+	 *                         directive, in which case an exception *will* be thrown, as that would be unexpected behavior and likely problematic.
 	 *
 	 * @return object Object with `composer.json` properties from the given `$dir` parameter.
 	 */
@@ -109,16 +109,16 @@ class Composer extends \Clever_Canyon\Utilities\STC\Abstracts\A6t_Stc_Base {
 		// Validate, setup, early returns.
 
 		if ( ! $dir || ! $file ) {
-			throw new Exception( 'Missing dir: `' . $dir . '` or file: `' . $file . '`.' );
+			throw new Fatal_Exception( 'Missing dir: `' . $dir . '` or file: `' . $file . '`.' );
 		}
 		if ( ! is_file( $file ) ) {      // Special case, we allow this to slide.
 			return $cache = (object) []; // Not possible. Consistent with {@see dev_json()}.
 		}
 		if ( ! is_readable( $file ) ) {
-			throw new Exception( 'Unable to read file: `' . $file . '`.' );
+			throw new Fatal_Exception( 'Unable to read file: `' . $file . '`.' );
 		}
 		if ( ! is_object( $json = U\Str::json_decode( file_get_contents( $file ) ) ) ) {
-			throw new Exception( 'Unable to decode file: `' . $file . '`.' );
+			throw new Fatal_Exception( 'Unable to decode file: `' . $file . '`.' );
 		}
 		if ( ! is_object( $json->extra ?? null ) ) {
 			$json->extra = (object) [];
@@ -132,7 +132,7 @@ class Composer extends \Clever_Canyon\Utilities\STC\Abstracts\A6t_Stc_Base {
 			// Validate `$extends-packages` directive.
 
 			if ( ! is_array( $json->extra->{$namespace}->{'$extends-packages'} ) ) {
-				throw new Exception( 'Unexpected `$extends-packages` directive in: `' . $file . '`. Must be array.' );
+				throw new Fatal_Exception( 'Unexpected `$extends-packages` directive in: `' . $file . '`. Must be array.' );
 			}
 			// Compile packages that we need to extend, recursively.
 
@@ -144,7 +144,7 @@ class Composer extends \Clever_Canyon\Utilities\STC\Abstracts\A6t_Stc_Base {
 					|| ! preg_match( T\Composer::PACKAGE_NAME_REGEXP, $_package_name )
 					|| strlen( $_package_name ) > T\Composer::PACKAGE_NAME_MAX_BYTES
 				) {
-					throw new Exception(
+					throw new Fatal_Exception(
 						'Unexpected `$extends-packages` entry: `' . $_package_name . '` in: `' . $file . '`.' .
 						' Must match pattern: `' . T\Composer::PACKAGE_NAME_REGEXP . '`' .
 						' and be <= `' . T\Composer::PACKAGE_NAME_MAX_BYTES . '` bytes in length.'
@@ -154,7 +154,7 @@ class Composer extends \Clever_Canyon\Utilities\STC\Abstracts\A6t_Stc_Base {
 				$_package_file = U\Dir::join( $_package_dir, '/composer.json' );
 
 				if ( ! is_file( $_package_file ) ) { // Report the case of missing dependency.
-					throw new Exception(
+					throw new Fatal_Exception(
 						'Missing `composer.json` file for `$extends-packages` entry: `' . $_package_name . '`' .
 						' in: `' . $file . '`. The missing location is: `' . $_package_file . '`.'
 					);
