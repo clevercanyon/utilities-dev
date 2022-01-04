@@ -1,3 +1,3 @@
-# CLEVER CANYON: PHP/JS Dev Utilities
+# CLEVER CANYON: PHP/JS Utilities (Dev Dependencies)
 
-Intended for internal company use only. CLEVER CANYON's dev utilities are for PHP/JS development.
+CLEVER CANYON’s utilities for PHP/JS (dev dependencies).

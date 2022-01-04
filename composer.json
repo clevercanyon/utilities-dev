@@ -1,7 +1,7 @@
 {
 	"license"           : "GPL-2.0-or-later",
 	"name"              : "clevercanyon/php-js-utilities-dev",
-	"description"       : "Intended for internal company use only. CLEVER CANYON's dev utilities are for PHP/JS development.",
+	"description"       : "CLEVER CANYON’s utilities for PHP/JS (dev dependencies).",
 	"authors"           : [
 		{
 			"name"     : "CLEVER CANYON",
@@ -18,10 +18,8 @@
 		}
 	},
 	"require"           : {
-		"php"                                   : "^8.0 || ^8.1",
-		"ext-json"                              : "*",
-		"ext-mbstring"                          : "*",
-		"ext-zip"                               : "*",
+		"clevercanyon/php-js-standards"         : "dev-main",
+		"clevercanyon/php-js-utilities-dev-npm" : "dev-main",
 
 		"aws/aws-sdk-php"                       : "^3.2",
 		"phpunit/phpunit"                       : "^9.5",
@@ -29,62 +27,6 @@
 
 		"php-stubs/wordpress-globals"           : "dev-master",
 		"php-stubs/woocommerce-stubs"           : "dev-master",
-		"humbug/php-scoper"                     : "dev-master",
-
-		"clevercanyon/php-js-standards"         : "dev-main",
-		"clevercanyon/php-js-utilities"         : "dev-main",
-		"clevercanyon/php-js-utilities-dev-npm" : "dev-main"
-	},
-	"autoload"          : {
-		"psr-4" : {
-			"Clever_Canyon\\Utilities_Dev\\" : "./src/classes"
-		}
-	},
-	"autoload-dev"      : {
-		"psr-4" : {
-			"Clever_Canyon\\Utilities_Dev__Tests\\" : "./tests/classes"
-		}
-	},
-	"scripts"           : {
-		"post-update-cmd"           : [
-			"[ $COMPOSER_DEV_MODE -eq 0 ] || ./src/toolchain/composer/post-update-cmd.php"
-		],
-		"run-project-tests"         : [
-			"./vendor/bin/phpunit --configuration ./.phpunit.xml --testsuite tests"
-		],
-		"scoper-config-file-update" : [
-			"./src/toolchain/scoper/config-file-update.php"
-		]
-	},
-	"extra"             : {
-		"clevercanyon" : {
-			"&" : {
-				"brand"                   : {
-					"data" : {
-						"slug" : "clevercanyon"
-					},
-					"aws"  : {
-						"s3" : {
-							"bucket"     : "clevercanyon",
-							"cdn_domain" : "cdn.clevercanyon.com"
-						}
-					}
-				},
-				"post_update_cmd_handler" : {
-					"symlink_local_packages" : {
-						"vendor"       : [
-							"clevercanyon/php-chalk",
-							"clevercanyon/php-js-standards",
-							"clevercanyon/php-js-utilities",
-							"clevercanyon/php-js-utilities-dev",
-							"clevercanyon/php-js-utilities-dev-npm"
-						],
-						"node_modules" : [
-							"@clevercanyon/php-js-utilities-dev-npm"
-						]
-					}
-				}
-			}
-		}
+		"humbug/php-scoper"                     : "dev-master"
 	}
 }
