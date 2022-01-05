@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "387184509249bcc4a6057d3ee0898e23",
+    "content-hash": "0dc9849e12f5e33dbb07d89b2875bb11",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -58,16 +58,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.208.8",
+            "version": "3.208.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "1fe99375c5a9012d8f99dbbe59fff8e7131a9703"
+                "reference": "acc9e8f88f568e03e00c2a57c27b550740e6c493"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/1fe99375c5a9012d8f99dbbe59fff8e7131a9703",
-                "reference": "1fe99375c5a9012d8f99dbbe59fff8e7131a9703",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/acc9e8f88f568e03e00c2a57c27b550740e6c493",
+                "reference": "acc9e8f88f568e03e00c2a57c27b550740e6c493",
                 "shasum": ""
             },
             "require": {
@@ -143,9 +143,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.208.8"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.208.9"
             },
-            "time": "2022-01-03T19:22:28+00:00"
+            "time": "2022-01-04T19:15:39+00:00"
         },
         {
             "name": "clevercanyon/php-js-standards",
@@ -827,17 +827,11 @@
         },
         {
             "name": "humbug/php-scoper",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/humbug/php-scoper.git",
+                "url": "https://github.com/clevercanyon/php-scoper",
                 "reference": "f38f22665f55e09ebf023e2849507bc323b0777f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/humbug/php-scoper/zipball/f38f22665f55e09ebf023e2849507bc323b0777f",
-                "reference": "f38f22665f55e09ebf023e2849507bc323b0777f",
-                "shasum": ""
             },
             "require": {
                 "composer/package-versions-deprecated": "^1.8",
@@ -851,13 +845,15 @@
                 "symfony/polyfill-php80": "^1.23",
                 "thecodingmachine/safe": "^1.3"
             },
+            "replace": {
+                "humbug/php-scoper": "self.version"
+            },
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.1",
                 "humbug/box": "^3.13.3",
                 "phpspec/prophecy-phpunit": "^2.0",
                 "phpunit/phpunit": "^9.0"
             },
-            "default-branch": true,
             "bin": [
                 "bin/php-scoper"
             ],
@@ -879,7 +875,14 @@
                     "Humbug\\PhpScoper\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "files": [
+                    "tests/functions.php"
+                ],
+                "psr-4": {
+                    "Humbug\\PhpScoper\\": "tests/"
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -898,16 +901,6 @@
                 }
             ],
             "description": "Prefixes all PHP namespaces in a file or directory.",
-            "support": {
-                "issues": "https://github.com/humbug/php-scoper/issues",
-                "source": "https://github.com/humbug/php-scoper/tree/master"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/theofidry",
-                    "type": "github"
-                }
-            ],
             "time": "2022-01-03T09:49:41+00:00"
         },
         {
@@ -1243,16 +1236,16 @@
         },
         {
             "name": "php-stubs/woocommerce-stubs",
-            "version": "dev-master",
+            "version": "v6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-stubs/woocommerce-stubs.git",
-                "reference": "a7204cfbb5fa90720773122cb68530087de5bc78"
+                "reference": "65e6be8a1b74b7be5d0d5591262342ff116f93db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-stubs/woocommerce-stubs/zipball/a7204cfbb5fa90720773122cb68530087de5bc78",
-                "reference": "a7204cfbb5fa90720773122cb68530087de5bc78",
+                "url": "https://api.github.com/repos/php-stubs/woocommerce-stubs/zipball/65e6be8a1b74b7be5d0d5591262342ff116f93db",
+                "reference": "65e6be8a1b74b7be5d0d5591262342ff116f93db",
                 "shasum": ""
             },
             "require": {
@@ -1266,7 +1259,6 @@
                 "symfony/polyfill-php73": "Symfony polyfill backporting some PHP 7.3+ features to lower PHP versions",
                 "szepeviktor/phpstan-wordpress": "WordPress extensions for PHPStan"
             },
-            "default-branch": true,
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1282,13 +1274,13 @@
             ],
             "support": {
                 "issues": "https://github.com/php-stubs/woocommerce-stubs/issues",
-                "source": "https://github.com/php-stubs/woocommerce-stubs/tree/v5.9.0"
+                "source": "https://github.com/php-stubs/woocommerce-stubs/tree/v6.0.0"
             },
-            "time": "2021-11-05T10:02:27+00:00"
+            "time": "2022-01-04T22:00:24+00:00"
         },
         {
             "name": "php-stubs/wordpress-globals",
-            "version": "dev-master",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-stubs/wordpress-globals.git",
@@ -1307,7 +1299,6 @@
                 "php-stubs/wordpress-stubs": "Up-to-date WordPress function and class declaration stubs",
                 "szepeviktor/phpstan-wordpress": "WordPress extensions for PHPStan"
             },
-            "default-branch": true,
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1324,40 +1315,36 @@
             ],
             "support": {
                 "issues": "https://github.com/php-stubs/wordpress-globals/issues",
-                "source": "https://github.com/php-stubs/wordpress-globals/tree/v0.2.0"
+                "source": "https://github.com/php-stubs/wordpress-globals/tree/master"
             },
             "time": "2020-01-13T06:12:59+00:00"
         },
         {
             "name": "php-stubs/wordpress-stubs",
-            "version": "dev-master",
+            "version": "v5.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-stubs/wordpress-stubs.git",
-                "reference": "d80a10bee6f63b76bc80bb43e85abe036daf74b9"
+                "reference": "67fd773742b7be5b4463f40318b0b4890a07033b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-stubs/wordpress-stubs/zipball/d80a10bee6f63b76bc80bb43e85abe036daf74b9",
-                "reference": "d80a10bee6f63b76bc80bb43e85abe036daf74b9",
+                "url": "https://api.github.com/repos/php-stubs/wordpress-stubs/zipball/67fd773742b7be5b4463f40318b0b4890a07033b",
+                "reference": "67fd773742b7be5b4463f40318b0b4890a07033b",
                 "shasum": ""
             },
             "replace": {
                 "giacocorsiglia/wordpress-stubs": "*"
             },
             "require-dev": {
-                "nikic/php-parser": "< 4.12.0",
-                "php": "~7.3 || ~8.0",
-                "php-stubs/generator": "^0.8.0",
-                "phpdocumentor/reflection-docblock": "^5.3",
-                "phpstan/phpstan": "^1.2"
+                "giacocorsiglia/stubs-generator": "^0.5.0",
+                "php": "~7.1"
             },
             "suggest": {
                 "paragonie/sodium_compat": "Pure PHP implementation of libsodium",
                 "symfony/polyfill-php73": "Symfony polyfill backporting some PHP 7.3+ features to lower PHP versions",
                 "szepeviktor/phpstan-wordpress": "WordPress extensions for PHPStan"
             },
-            "default-branch": true,
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1372,9 +1359,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-stubs/wordpress-stubs/issues",
-                "source": "https://github.com/php-stubs/wordpress-stubs/tree/master"
+                "source": "https://github.com/php-stubs/wordpress-stubs/tree/v5.8.2"
             },
-            "time": "2021-12-03T21:48:54+00:00"
+            "time": "2021-11-11T13:57:00+00:00"
         },
         {
             "name": "phpcompatibility/php-compatibility",
@@ -1660,16 +1647,16 @@
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "1.5.1",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "a12f7e301eb7258bb68acd89d4aefa05c2906cae"
+                "reference": "93ebd0014cab80c4ea9f5e297ea48672f1b87706"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/a12f7e301eb7258bb68acd89d4aefa05c2906cae",
-                "reference": "a12f7e301eb7258bb68acd89d4aefa05c2906cae",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/93ebd0014cab80c4ea9f5e297ea48672f1b87706",
+                "reference": "93ebd0014cab80c4ea9f5e297ea48672f1b87706",
                 "shasum": ""
             },
             "require": {
@@ -1704,9 +1691,9 @@
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
             "support": {
                 "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
-                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.5.1"
+                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.6.0"
             },
-            "time": "2021-10-02T14:08:47+00:00"
+            "time": "2022-01-04T19:58:01+00:00"
         },
         {
             "name": "phpspec/prophecy",
@@ -4843,22 +4830,11 @@
         }
     ],
     "packages-dev": [],
-    "aliases": [
-        {
-            "package": "php-stubs/wordpress-stubs",
-            "version": "9999999-dev",
-            "alias": "5.8.2",
-            "alias_normalized": "5.8.2.0"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
         "clevercanyon/php-js-standards": 20,
-        "clevercanyon/php-js-utilities-dev-npm": 20,
-        "php-stubs/wordpress-globals": 20,
-        "php-stubs/wordpress-stubs": 20,
-        "php-stubs/woocommerce-stubs": 20,
-        "humbug/php-scoper": 20
+        "clevercanyon/php-js-utilities-dev-npm": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
