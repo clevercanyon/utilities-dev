@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0dc9849e12f5e33dbb07d89b2875bb11",
+    "content-hash": "45f747b5e8a8552547166768f8ff232d",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -827,7 +827,7 @@
         },
         {
             "name": "humbug/php-scoper",
-            "version": "1.0.0",
+            "version": "dev-clevercanyon",
             "source": {
                 "type": "git",
                 "url": "https://github.com/clevercanyon/php-scoper",
@@ -854,6 +854,7 @@
                 "phpspec/prophecy-phpunit": "^2.0",
                 "phpunit/phpunit": "^9.0"
             },
+            "default-branch": true,
             "bin": [
                 "bin/php-scoper"
             ],
@@ -4840,7 +4841,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "clevercanyon/php-js-standards": 20,
-        "clevercanyon/php-js-utilities-dev-npm": 20
+        "clevercanyon/php-js-utilities-dev-npm": 20,
+        "humbug/php-scoper": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
