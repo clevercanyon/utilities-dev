@@ -69,15 +69,27 @@
 
 # JavaScript
 
-*.babelrc text
 *.js text
+*.cjs text
+*.mjs text
+*.jsx text
 *.js.map text
+
+*.ts text
+*.cts text
+*.mts text
+*.tsx text
+*.ts.map text
+
 *.json text
 *.json5 text
-*.jsx text
+
 *.npmrc text
-*.ts text
-*.tsx text
+*.yarnrc text
+*.babelrc text
+
+.yarn/releases/** binary
+.yarn/plugins/** binary
 
 # Applescript
 
@@ -180,6 +192,7 @@
 *.otf binary
 *.ttf binary
 *.woff binary
+*.woff2 binary
 
 # Archives
 
