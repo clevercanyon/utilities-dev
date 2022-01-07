@@ -29,12 +29,22 @@
 		"php-stubs/wordpress-globals"           : ">=0.2.0",
 		"php-stubs/wordpress-stubs"             : ">=5.8.2",
 		"php-stubs/woocommerce-stubs"           : ">=6.0.0",
-		"humbug/php-scoper"                     : "dev-clevercanyon"
+		"clevercanyon/php-scoper"               : "dev-clevercanyon"
 	},
 	"repositories"      : [
 		{
-			"type" : "git",
-			"url"  : "https://github.com/clevercanyon/php-scoper"
+			"type"    : "package",
+			"package" : [
+				{
+					"name"    : "clevercanyon/php-scoper",
+					"version" : "dev-clevercanyon",
+					"source"  : {
+						"type"      : "git",
+						"reference" : "clevercanyon",
+						"url"       : "https://github.com/clevercanyon/php-scoper"
+					}
+				}
+			]
 		}
 	]
 }
