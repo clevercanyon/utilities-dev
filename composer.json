@@ -34,17 +34,15 @@
 	"repositories"      : [
 		{
 			"type"    : "package",
-			"package" : [
-				{
-					"name"    : "clevercanyon/php-scoper",
-					"version" : "dev-clevercanyon",
-					"source"  : {
-						"type"      : "git",
-						"reference" : "clevercanyon",
-						"url"       : "https://github.com/clevercanyon/php-scoper"
-					}
+			"package" : {
+				"name"    : "clevercanyon/php-scoper",
+				"version" : "dev-clevercanyon",
+				"source"  : {
+					"type"      : "git",
+					"reference" : "clevercanyon",
+					"url"       : "https://github.com/clevercanyon/php-scoper"
 				}
-			]
+			}
 		}
 	]
 }
