@@ -19,6 +19,8 @@
 	},
 	"require"           : {
 		"ext-zip"                               : "*",
+		"ulrichsg/getopt-php"                   : "^4.0",
+
 		"clevercanyon/php-js-standards"         : "dev-main",
 		"clevercanyon/php-js-utilities-dev-npm" : "dev-main",
 
