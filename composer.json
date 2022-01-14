@@ -18,6 +18,7 @@
 		}
 	},
 	"require"           : {
+		"php-64bit"                             : "^8.0",
 		"ext-zip"                               : "*",
 		"ulrichsg/getopt-php"                   : "^4.0",
 
