@@ -20,11 +20,11 @@
 	"require"           : {
 		"php-64bit"                             : "^7.4 || ^8.0 || ^8.1",
 		"ext-zip"                               : "*",
-		"ulrichsg/getopt-php"                   : "^4.0",
 
 		"clevercanyon/php-js-standards"         : "dev-main",
 		"clevercanyon/php-js-utilities-dev-npm" : "dev-main",
 
+		"ulrichsg/getopt-php"                   : "^4.0",
 		"aws/aws-sdk-php"                       : "^3.2",
 		"phpunit/phpunit"                       : "^9.5",
 		"nikic/php-parser"                      : "^4.13",
