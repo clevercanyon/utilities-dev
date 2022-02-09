@@ -1,6 +1,6 @@
 {
 	"license"           : "GPL-2.0-or-later",
-	"name"              : "clevercanyon/php-js-utilities-dev",
+	"name"              : "clevercanyon/utilities-dev",
 	"description"       : "CLEVER CANYON’s utilities for PHP/JS (dev dependencies).",
 	"authors"           : [
 		{
@@ -18,21 +18,28 @@
 		}
 	},
 	"require"           : {
-		"php-64bit"                             : "^7.4 || ^8.0 || ^8.1",
-		"ext-zip"                               : "*",
+		"php-64bit"                      : "^7.4 || ^8.0 || ^8.1",
+		"ext-fileinfo"                   : "*",
+		"ext-intl"                       : "*",
+		"ext-memcached"                  : "*",
+		"ext-json"                       : "*",
+		"ext-mbstring"                   : "*",
+		"ext-posix"                      : "*",
+		"ext-session"                    : "*",
+		"ext-zip"                        : "*",
 
-		"clevercanyon/php-js-standards"         : "dev-main",
-		"clevercanyon/php-js-utilities-dev-npm" : "dev-main",
+		"clevercanyon/standards"         : "dev-main",
+		"clevercanyon/utilities-dev-npm" : "dev-main",
 
-		"ulrichsg/getopt-php"                   : "^4.0",
-		"aws/aws-sdk-php"                       : "^3.2",
-		"phpunit/phpunit"                       : "^9.5",
-		"nikic/php-parser"                      : "^4.13",
+		"ulrichsg/getopt-php"            : "^4.0",
+		"aws/aws-sdk-php"                : "^3.2",
+		"phpunit/phpunit"                : "^9.5",
+		"nikic/php-parser"               : "^4.13",
 
-		"php-stubs/wordpress-globals"           : ">=0.2.0",
-		"php-stubs/wordpress-stubs"             : ">=5.8.2",
-		"php-stubs/woocommerce-stubs"           : ">=6.0.0",
+		"php-stubs/wordpress-globals"    : ">=0.2.0",
+		"php-stubs/wordpress-stubs"      : ">=5.8.2",
+		"php-stubs/woocommerce-stubs"    : ">=6.0.0",
 
-		"clevercanyon/php-scoper"               : "dev-fork"
+		"clevercanyon/php-scoper"        : "dev-fork"
 	}
 }
