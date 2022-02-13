@@ -1,10 +1,10 @@
 {
 	"license"           : "GPL-2.0-or-later",
 	"name"              : "clevercanyon/utilities-dev",
-	"description"       : "CLEVER CANYON’s utilities for PHP/JS (dev dependencies).",
+	"description"       : "Clever Canyon’s utilities for PHP/JS (dev dependencies).",
 	"authors"           : [
 		{
-			"name"     : "CLEVER CANYON",
+			"name"     : "Clever Canyon",
 			"homepage" : "https://clevercanyon.com",
 			"role"     : "organization"
 		}
@@ -39,7 +39,6 @@
 		"php-stubs/wordpress-globals"    : ">=0.2.0",
 		"php-stubs/wordpress-stubs"      : ">=5.8.2",
 		"php-stubs/woocommerce-stubs"    : ">=6.0.0",
-
-		"clevercanyon/php-scoper"        : "dev-fork"
+		"humbug/php-scoper"              : "dev-master"
 	}
 }

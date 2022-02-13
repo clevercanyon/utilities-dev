@@ -1,3 +1,3 @@
-# CLEVER CANYON: PHP/JS Utilities (Dev Dependencies)
+# Clever Canyon: PHP/JS Utilities (Dev Dependencies)
 
-CLEVER CANYON’s utilities for PHP/JS (dev dependencies).
+Clever Canyon’s utilities for PHP/JS (dev dependencies).
