@@ -153,12 +153,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/clevercanyon/standards.git",
-                "reference": "2ed786b2a42a3e162a0a5e65b2bd9a6d2b5a19ff"
+                "reference": "709337effb46f24fcbebd8ed86970c9073eb6cbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/clevercanyon/standards/zipball/2ed786b2a42a3e162a0a5e65b2bd9a6d2b5a19ff",
-                "reference": "2ed786b2a42a3e162a0a5e65b2bd9a6d2b5a19ff",
+                "url": "https://api.github.com/repos/clevercanyon/standards/zipball/709337effb46f24fcbebd8ed86970c9073eb6cbe",
+                "reference": "709337effb46f24fcbebd8ed86970c9073eb6cbe",
                 "shasum": ""
             },
             "require": {
@@ -176,17 +176,17 @@
             ],
             "authors": [
                 {
-                    "name": "CLEVER CANYON",
+                    "name": "Clever Canyon",
                     "homepage": "https://clevercanyon.com",
                     "role": "organization"
                 }
             ],
-            "description": "CLEVER CANYON’s coding standards for PHP/JS.",
+            "description": "Clever Canyon’s coding standards for PHP/JS.",
             "support": {
                 "issues": "https://github.com/clevercanyon/standards/issues",
                 "source": "https://github.com/clevercanyon/standards/tree/main"
             },
-            "time": "2022-02-09T17:17:09+00:00"
+            "time": "2022-02-13T22:13:03+00:00"
         },
         {
             "name": "clevercanyon/utilities-dev-npm",
@@ -194,12 +194,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/clevercanyon/utilities-dev-npm.git",
-                "reference": "3fcebae606e0ed313c6d201ca34a80a1c0852f0f"
+                "reference": "4654c32c69deaf6a884facf439d6ac2b98c4f90b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/clevercanyon/utilities-dev-npm/zipball/3fcebae606e0ed313c6d201ca34a80a1c0852f0f",
-                "reference": "3fcebae606e0ed313c6d201ca34a80a1c0852f0f",
+                "url": "https://api.github.com/repos/clevercanyon/utilities-dev-npm/zipball/4654c32c69deaf6a884facf439d6ac2b98c4f90b",
+                "reference": "4654c32c69deaf6a884facf439d6ac2b98c4f90b",
                 "shasum": ""
             },
             "default-branch": true,
@@ -210,17 +210,17 @@
             ],
             "authors": [
                 {
-                    "name": "CLEVER CANYON",
+                    "name": "Clever Canyon",
                     "homepage": "https://clevercanyon.com",
                     "role": "organization"
                 }
             ],
-            "description": "CLEVER CANYON’s utilities for PHP/JS (NPM dev dependencies).",
+            "description": "Clever Canyon’s utilities for PHP/JS (NPM dev dependencies).",
             "support": {
                 "issues": "https://github.com/clevercanyon/utilities-dev-npm/issues",
-                "source": "https://github.com/clevercanyon/utilities-dev-npm/tree/main"
+                "source": "https://github.com/clevercanyon/utilities-dev-npm/tree/v1.0.2"
             },
-            "time": "2022-02-09T17:15:42+00:00"
+            "time": "2022-02-13T22:14:34+00:00"
         },
         {
             "name": "composer/package-versions-deprecated",
@@ -551,12 +551,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\": "src/"
-                },
                 "files": [
                     "src/functions_include.php"
-                ]
+                ],
+                "psr-4": {
+                    "GuzzleHttp\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -836,12 +836,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/humbug/php-scoper.git",
-                "reference": "8feb2ae12c81d9dcd1a4f3ab60fe8074045fe747"
+                "reference": "89e135bd8fad131533ec2492e10fe13b28cc316f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/humbug/php-scoper/zipball/8feb2ae12c81d9dcd1a4f3ab60fe8074045fe747",
-                "reference": "8feb2ae12c81d9dcd1a4f3ab60fe8074045fe747",
+                "url": "https://api.github.com/repos/humbug/php-scoper/zipball/89e135bd8fad131533ec2492e10fe13b28cc316f",
+                "reference": "89e135bd8fad131533ec2492e10fe13b28cc316f",
                 "shasum": ""
             },
             "require": {
@@ -910,7 +910,7 @@
                 "issues": "https://github.com/humbug/php-scoper/issues",
                 "source": "https://github.com/humbug/php-scoper/tree/master"
             },
-            "time": "2022-02-13T13:43:09+00:00"
+            "time": "2022-02-13T19:46:54+00:00"
         },
         {
             "name": "jetbrains/phpstorm-stubs",
