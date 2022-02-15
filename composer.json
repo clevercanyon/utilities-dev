@@ -23,7 +23,6 @@
 		"ext-intl"                       : "*",
 		"ext-json"                       : "*",
 		"ext-mbstring"                   : "*",
-		"ext-posix"                      : "*",
 		"ext-session"                    : "*",
 		"ext-zip"                        : "*",
 
@@ -41,6 +40,7 @@
 		"humbug/php-scoper"              : "dev-master"
 	},
 	"suggest"           : {
-		"ext-memcached" : "*"
+		"ext-memcached" : "*",
+		"ext-posix"     : "*"
 	}
 }
