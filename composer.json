@@ -21,7 +21,6 @@
 		"php-64bit"                      : "^7.4 || ^8.0 || ^8.1",
 		"ext-fileinfo"                   : "*",
 		"ext-intl"                       : "*",
-		"ext-memcached"                  : "*",
 		"ext-json"                       : "*",
 		"ext-mbstring"                   : "*",
 		"ext-posix"                      : "*",
@@ -40,5 +39,8 @@
 		"php-stubs/wordpress-stubs"      : ">=5.8.2",
 		"php-stubs/woocommerce-stubs"    : ">=6.0.0",
 		"humbug/php-scoper"              : "dev-master"
+	},
+	"suggest"           : {
+		"ext-memcached" : "*"
 	}
 }
