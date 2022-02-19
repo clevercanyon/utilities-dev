@@ -153,12 +153,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/clevercanyon/php-scoper.git",
-                "reference": "89e135bd8fad131533ec2492e10fe13b28cc316f"
+                "reference": "90b75b8547abbc118ec53d63e346a001e17932df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/clevercanyon/php-scoper/zipball/89e135bd8fad131533ec2492e10fe13b28cc316f",
-                "reference": "89e135bd8fad131533ec2492e10fe13b28cc316f",
+                "url": "https://api.github.com/repos/clevercanyon/php-scoper/zipball/90b75b8547abbc118ec53d63e346a001e17932df",
+                "reference": "90b75b8547abbc118ec53d63e346a001e17932df",
                 "shasum": ""
             },
             "require": {
@@ -226,7 +226,7 @@
             "support": {
                 "source": "https://github.com/clevercanyon/php-scoper/tree/fork"
             },
-            "time": "2022-02-13T19:46:54+00:00"
+            "time": "2022-02-19T20:11:15+00:00"
         },
         {
             "name": "clevercanyon/standards",
