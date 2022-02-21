@@ -153,12 +153,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/clevercanyon/php-scoper.git",
-                "reference": "90b75b8547abbc118ec53d63e346a001e17932df"
+                "reference": "2cbabfb26609f937e4a44410945447c8efbe7e9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/clevercanyon/php-scoper/zipball/90b75b8547abbc118ec53d63e346a001e17932df",
-                "reference": "90b75b8547abbc118ec53d63e346a001e17932df",
+                "url": "https://api.github.com/repos/clevercanyon/php-scoper/zipball/2cbabfb26609f937e4a44410945447c8efbe7e9b",
+                "reference": "2cbabfb26609f937e4a44410945447c8efbe7e9b",
                 "shasum": ""
             },
             "require": {
@@ -226,7 +226,7 @@
             "support": {
                 "source": "https://github.com/clevercanyon/php-scoper/tree/fork"
             },
-            "time": "2022-02-19T20:11:15+00:00"
+            "time": "2022-02-19T20:42:21+00:00"
         },
         {
             "name": "clevercanyon/standards",
@@ -234,12 +234,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/clevercanyon/standards.git",
-                "reference": "5d7afe064e8492712760dc162c6b4db10cb6cebc"
+                "reference": "906a44bb6d100d0f644fdb821d8cbc10e9468d90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/clevercanyon/standards/zipball/5d7afe064e8492712760dc162c6b4db10cb6cebc",
-                "reference": "5d7afe064e8492712760dc162c6b4db10cb6cebc",
+                "url": "https://api.github.com/repos/clevercanyon/standards/zipball/906a44bb6d100d0f644fdb821d8cbc10e9468d90",
+                "reference": "906a44bb6d100d0f644fdb821d8cbc10e9468d90",
                 "shasum": ""
             },
             "require": {
@@ -267,7 +267,7 @@
                 "issues": "https://github.com/clevercanyon/standards/issues",
                 "source": "https://github.com/clevercanyon/standards/tree/main"
             },
-            "time": "2022-02-14T00:45:25+00:00"
+            "time": "2022-02-21T09:09:44+00:00"
         },
         {
             "name": "clevercanyon/utilities-dev-npm",
@@ -1193,16 +1193,16 @@
         },
         {
             "name": "phar-io/version",
-            "version": "3.1.1",
+            "version": "3.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phar-io/version.git",
-                "reference": "15a90844ad40f127afd244c0cad228de2a80052a"
+                "reference": "4f7fd7836c6f332bb2933569e566a0d6c4cbed74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phar-io/version/zipball/15a90844ad40f127afd244c0cad228de2a80052a",
-                "reference": "15a90844ad40f127afd244c0cad228de2a80052a",
+                "url": "https://api.github.com/repos/phar-io/version/zipball/4f7fd7836c6f332bb2933569e566a0d6c4cbed74",
+                "reference": "4f7fd7836c6f332bb2933569e566a0d6c4cbed74",
                 "shasum": ""
             },
             "require": {
@@ -1238,9 +1238,9 @@
             "description": "Library for handling version information and constraints",
             "support": {
                 "issues": "https://github.com/phar-io/version/issues",
-                "source": "https://github.com/phar-io/version/tree/3.1.1"
+                "source": "https://github.com/phar-io/version/tree/3.2.1"
             },
-            "time": "2022-02-07T21:56:48+00:00"
+            "time": "2022-02-21T01:04:05+00:00"
         },
         {
             "name": "php-stubs/woocommerce-stubs",
