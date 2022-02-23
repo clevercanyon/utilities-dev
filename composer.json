@@ -18,11 +18,15 @@
 		}
 	},
 	"require"           : {
-		"php-64bit"                      : "^7.4 || ^8.0 || ^8.1",
+		"php-64bit"                      : "^8.0 || ^8.1",
 		"ext-fileinfo"                   : "*",
 		"ext-intl"                       : "*",
 		"ext-json"                       : "*",
 		"ext-mbstring"                   : "*",
+		"ext-pcntl"                      : "*",
+		"ext-pdo"                        : "*",
+		"ext-posix"                      : "*",
+		"ext-readline"                   : "*",
 		"ext-session"                    : "*",
 		"ext-zip"                        : "*",
 
